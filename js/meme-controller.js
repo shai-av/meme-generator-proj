@@ -1,14 +1,12 @@
 'use strict'
 var gCanvas
 var gCtx
-var gCurrImg
 var gCurrMeme
 
 
 function onMemeGenInit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
-    gCurrImg = getSelectedImage()
     gCurrMeme = getMeme()
 
     setLineTextInputVal()
@@ -19,8 +17,8 @@ function onMemeGenInit() {
 
 function resizeCanvas() {
     // let elCanvasContainer = document.querySelector('.canvas-container')
-    // gCanvas.width = elCanvasContainer.offsetWidth*0.95
-    // gCanvas.height = elCanvasContainer.offsetHeight*0.95
+    // gCanvas.width = elCanvasContainer.offsetWidth * 0.95
+    // gCanvas.height = elCanvasContainer.offsetHeight * 0.95
     gCanvas.width = 500
     gCanvas.height = 500
 }
@@ -38,10 +36,10 @@ function renderCanvas() {
 function addListeners() {
     // addMouseListeners()
     // addTouchListeners()
-    // window.addEventListener('resize', () => {
-    //     resizeCanvas()
-    //     renderCanvas()
-    // })
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        renderCanvas()
+    })
 }
 
 // function addMouseListeners() {
@@ -56,75 +54,91 @@ function addListeners() {
 //     gCanvas.addEventListener('touchend', onUp)
 // }
 
-function hideMemeGen(){
+function hideMemeGen() {
     document.querySelector('.memegen').style.display = 'none'
 }
 
-function showMemeGen(){
+function showMemeGen() {
     document.querySelector('.memegen').style.display = 'flex'
 }
 
-// function drawText(line) {
-//     gCtx.lineWidth = 2;
-//     gCtx.strokeStyle = line.strokeColor;
-//     gCtx.fillStyle = line.color;
-//     gCtx.font = `${line.size}px ${line.font}`;
-//     gCtx.fillText(line.text, line.posX, line.posY);
-//     gCtx.strokeText(line.text, line.posX, line.posY);
-//   }
-function drawText({strokeColor,color,size,font,text,posX,posY}) {
+function drawText({ strokeColor, color, size, font, text, posX, posY }) {
     gCtx.lineWidth = 2;
     gCtx.strokeStyle = strokeColor;
     gCtx.fillStyle = color;
     gCtx.font = `${size}px ${font}`;
     gCtx.fillText(text, posX, posY);
     gCtx.strokeText(text, posX, posY);
-  }
-  
-  function renderLines(){
-    gCurrMeme.lines.forEach(line=>drawText(line))
-  }
+}
+
+function drawRect({posX,posY,size,text}) {
+    gCtx.beginPath();
+    gCtx.rect(posX, posY-size-10,  text.length*size/2,(size+10));
+    gCtx.stroke();
+}
+
+function renderLines() {
+    gCurrMeme.lines.forEach(line => {
+        if(gCurrLine === line) drawRect(line);
+        drawText(line)
+    })
+}
 
 //--- controller ---
-function onIncreaseTextSize(){
+function onIncreaseTextSize() {
     increaseTextSize()
     renderCanvas()
 }
 
-function onDecreaseTextSize(){
+function onDecreaseTextSize() {
     decreaseTextSize()
     renderCanvas()
 }
 
-function onStrokeClrChnage(color){
+function onStrokeClrChnage(color) {
     setStrokeColor(color)
     renderCanvas()
 }
 
-function onFontClrChange(color){
+function onFontClrChange(color) {
     setFontColor(color)
     renderCanvas()
 }
 
-function onMovePrevLine(){
+function onMovePrevLine() {
     setPrevLine()
     setLineTextInputVal()
+    renderCanvas()
 }
 
-function onMoveNextLine(){
+function onMoveNextLine() {
     setNextLine()
     setLineTextInputVal()
+    renderCanvas()
 }
 
-function setLineTextInputVal(){
+function setLineTextInputVal() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
-    elLineTxtInput.value = getCurrLine().text
+    if (gCurrMeme.lines.length === 0) {
+        elLineTxtInput.value = 'Enter Text Here'
+    } else elLineTxtInput.value = getCurrLine().text
 }
 
-function onAddLine(){
+function onAdd() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
-    addLine(elLineTxtInput.value+'')
+    addLine(elLineTxtInput.value + '')
     setLineTextInputVal()
     renderLines()
 }
 
+function onDelete() {
+    deleteLine()
+    renderCanvas()
+    setLineTextInputVal()
+}
+
+function downloadCanvas(elLink) {
+    const data = gCanvas.toDataURL()
+    elLink.href = data
+    elLink.download = 'my-img.jpg'
+}

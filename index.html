@@ -30,8 +30,8 @@
                     <input type="text" name="line-text" placeholder="here">
                     <button class="controller-item" onclick="onMovePrevLine()">&UpArrow;</button>
                     <button class="controller-item" onclick="onMoveNextLine()">&DownArrow;</button>
-                    <button class="controller-item" onclick="onAddLine()">&plus;</button>
-                    <button class="controller-item" onclick="onDeleteLine()">🗑</button>
+                    <button class="controller-item" onclick="onAdd()">&plus;</button>
+                    <button class="controller-item" onclick="onDelete()">🗑</button>
                     <button class="controller-item" onclick="onIncreaseTextSize()">A+</button>
                     <button class="controller-item" onclick="onDecreaseTextSize()">A -</button>
                     <button class="controller-item" onclick="onAlignLeft()">left</button>
@@ -41,8 +41,9 @@
                         <option value="impact">Impact</option>
                         <option value="ariel">Ariel</option>
                     </select>
-                    <input class="controller-item" type="color" name="stroke-color" onchange="onStrokeClrChnage(this.value)">
-                    <input class="controller-item" type="color" name="font-color" onchange="onFontClrChange(this.value)">
+                    <input class="controller-item" title="stroke" type="color" name="stroke-color" onchange="onStrokeClrChnage(this.value)">
+                    <input class="controller-item" title="font" type="color" name="font-color" onchange="onFontClrChange(this.value)">
+                    <button class="controller-item"><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
                 </div>
             </div>
         </section>
