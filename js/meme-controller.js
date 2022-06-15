@@ -73,7 +73,8 @@ function drawText({ strokeColor, color, size, font, text, posX, posY }) {
 
 function drawRect({posX,posY,size,text}) {
     gCtx.beginPath();
-    gCtx.rect(posX, posY-size-10,  text.length*size/2,(size+10));
+    gCtx.strokeStyle = 'white'
+    gCtx.rect(posX-size/4, posY-size,  text.length*size*0.6,(size+10));
     gCtx.stroke();
 }
 
@@ -86,32 +87,38 @@ function renderLines() {
 
 //--- controller ---
 function onIncreaseTextSize() {
+    if(!LinesExist()) return
     increaseTextSize()
     renderCanvas()
 }
 
 function onDecreaseTextSize() {
+    if(!LinesExist()) return
     decreaseTextSize()
     renderCanvas()
 }
 
 function onStrokeClrChnage(color) {
+    if(!LinesExist()) return
     setStrokeColor(color)
     renderCanvas()
 }
 
 function onFontClrChange(color) {
+    if(!LinesExist()) return
     setFontColor(color)
     renderCanvas()
 }
 
 function onMovePrevLine() {
+    if(!LinesExist()) return
     setPrevLine()
     setLineTextInputVal()
     renderCanvas()
 }
 
 function onMoveNextLine() {
+    if(!LinesExist()) return
     setNextLine()
     setLineTextInputVal()
     renderCanvas()
@@ -132,6 +139,7 @@ function onAdd() {
 }
 
 function onDelete() {
+    if(!LinesExist()) return
     deleteLine()
     renderCanvas()
     setLineTextInputVal()
@@ -141,4 +149,8 @@ function downloadCanvas(elLink) {
     const data = gCanvas.toDataURL()
     elLink.href = data
     elLink.download = 'my-img.jpg'
+}
+
+function LinesExist(){
+    return gCurrMeme.lines.length !== 0
 }

@@ -100,7 +100,6 @@ function addLine(text) {
 }
 
 function deleteLine() {
-    if (gMeme.lines.length === 0) return
     gMeme.lines.splice(gMeme.currLine, 1)
     if (gMeme.currLine === gMeme.lines.length) _setLastLine()
     setGCurrLine()
