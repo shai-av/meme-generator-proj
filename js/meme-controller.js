@@ -2,12 +2,16 @@
 var gCanvas
 var gCtx
 var gCurrImg
+var gCurrMeme
+
 
 function onMemeGenInit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
     gCurrImg = getSelectedImage()
-    if (gCurrImg) renderImg(gCurrImg)
+    gCurrMeme = getMeme()
+
+    setLineTextInputVal()
     addListeners()
     resizeCanvas()
     renderCanvas()
@@ -22,10 +26,12 @@ function resizeCanvas() {
 }
 
 function renderCanvas() {
-    gCtx.fillStyle = '#fafafa'
-    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
-    gCtx.fillStyle = 'black'
-
+    let image = new Image()
+    image.src = gCurrMeme.image.dataset.src
+    image.onload = () => {
+        gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height);
+        renderLines()
+    }
 }
 
 //--- listeners ---
@@ -38,53 +44,87 @@ function addListeners() {
     // })
 }
 
-function addMouseListeners() {
-    gCanvas.addEventListener('mousemove', onMove)
-    gCanvas.addEventListener('mousedown', onDown)
-    gCanvas.addEventListener('mouseup', onUp)
-}
+// function addMouseListeners() {
+//     gCanvas.addEventListener('mousemove', onMove)
+//     gCanvas.addEventListener('mousedown', onDown)
+//     gCanvas.addEventListener('mouseup', onUp)
+// }
 
-function addTouchListeners() {
-    gCanvas.addEventListener('touchmove', onMove)
-    gCanvas.addEventListener('touchstart', onDown)
-    gCanvas.addEventListener('touchend', onUp)
-}
-function renderImg(img) {
-    let image = new Image()
-    image.src = img.dataset.src
-    image.onload = () => {
-        gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height);
-    }
-    return image
-}
+// function addTouchListeners() {
+//     gCanvas.addEventListener('touchmove', onMove)
+//     gCanvas.addEventListener('touchstart', onDown)
+//     gCanvas.addEventListener('touchend', onUp)
+// }
 
 function hideMemeGen(){
     document.querySelector('.memegen').style.display = 'none'
 }
+
 function showMemeGen(){
     document.querySelector('.memegen').style.display = 'flex'
 }
+
+// function drawText(line) {
+//     gCtx.lineWidth = 2;
+//     gCtx.strokeStyle = line.strokeColor;
+//     gCtx.fillStyle = line.color;
+//     gCtx.font = `${line.size}px ${line.font}`;
+//     gCtx.fillText(line.text, line.posX, line.posY);
+//     gCtx.strokeText(line.text, line.posX, line.posY);
+//   }
+function drawText({strokeColor,color,size,font,text,posX,posY}) {
+    gCtx.lineWidth = 2;
+    gCtx.strokeStyle = strokeColor;
+    gCtx.fillStyle = color;
+    gCtx.font = `${size}px ${font}`;
+    gCtx.fillText(text, posX, posY);
+    gCtx.strokeText(text, posX, posY);
+  }
+  
+  function renderLines(){
+    gCurrMeme.lines.forEach(line=>drawText(line))
+  }
+
 //--- controller ---
-// function onIncreaseTextSize(){
-//     gCtx.
-// }
+function onIncreaseTextSize(){
+    increaseTextSize()
+    renderCanvas()
+}
 
-// function onDecreaseTextSize(){
+function onDecreaseTextSize(){
+    decreaseTextSize()
+    renderCanvas()
+}
 
-// }
+function onStrokeClrChnage(color){
+    setStrokeColor(color)
+    renderCanvas()
+}
 
-// function onStrokeClrChnage(color){
-//     gCtx.strokeStyle = color
-// }
+function onFontClrChange(color){
+    setFontColor(color)
+    renderCanvas()
+}
 
-// function onFontClrChange(color){
-//     gCtx.fillStyle = color
-// }
+function onMovePrevLine(){
+    setPrevLine()
+    setLineTextInputVal()
+}
 
-// function createMeme(){
-//     return {
-//         img:getSelectedImage(),
-//         lines:['test','test2'],
+function onMoveNextLine(){
+    setNextLine()
+    setLineTextInputVal()
+}
 
-//     }
-// }
+function setLineTextInputVal(){
+    let elLineTxtInput = document.querySelector('[name=line-text]')
+    elLineTxtInput.value = getCurrLine().text
+}
+
+function onAddLine(){
+    let elLineTxtInput = document.querySelector('[name=line-text]')
+    addLine(elLineTxtInput.value+'')
+    setLineTextInputVal()
+    renderLines()
+}
+
