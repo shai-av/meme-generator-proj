@@ -1,0 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    /* font-family: playfair, serif; */
+    /* color: var(--clr1); */
+}
+
+body {
+    margin: 0;
+}

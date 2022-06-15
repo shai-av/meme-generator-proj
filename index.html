@@ -7,11 +7,11 @@
     <title>memegen</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <header class="main-header">
-        <h2 class="header-logo"></h2>
+<body onload="onInit()">
+    <header class="main-header flex space-between align-center">
+        <h2 class="header-logo">MemeGEN</h2>
         <nav>
-            <ul>
+            <ul class="clean-list flex">
                 <li class="nav-btn-gallery">Gallery</li>
                 <li class="nav-btn-memes">Memes</li>
                 <li class="nav-btn-about">About</li>
@@ -19,12 +19,21 @@
         </nav>
     </header>
     <main class="main-content">
-        <div class="gallery"></div>
-        <div class="memegen"></div>
+        <section class="gallery grid-container" style="display:none" >  
+        </section>
+        <section class="memegen">
+            <div class="canvas-container">
+                <canvas id="my-canvas"></canvas>
+            </div>
+            <div class="drawing-controller"></div>
+        </section>
     </main>
     <footer class="main-footer"></footer>
+
+
+    <script src="js/services/gallery-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
-    <script src="js/gallery-controller.js"></script>
 </body>
 </html>

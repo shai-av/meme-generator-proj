@@ -1,7 +1,16 @@
-*{
-    box-sizing: border-box;
-}
 
-body{
-    margin:0;
-}
+/* SETUP  */
+/* @import 'setup/vars.css'; */
+/* @import 'setup/typography.css'; */
+
+/* BASE */
+@import 'basic/base.css';
+/* @import 'basic/layout.css'; */
+@import 'basic/helpers.css';
+
+/* COMPONENTS */
+@import 'components/gallery.css';
+@import 'components/memegen.css';
+
+/* Media Queries */
+/* @import 'mq/mq.css'; */
