@@ -8,11 +8,10 @@ function renderImages() {
     let strHTML = ''
     images.forEach((img) => strHTML += `<div class="grid-item"><img 
                                         data-src=img/${img.src} 
-                                        data-tag=
+                                        data-tag=${img.tag}
                                         src="img/${img.src}" 
                                         onclick="onImgClk(this)">
                                         </div>`)
-
     let gallery = document.querySelector('.gallery')
     gallery.innerHTML = strHTML
 }
