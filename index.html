@@ -7,7 +7,7 @@
     <title>memegen</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body onload="onInit()">
+<body onload="onGalleryInit()">
     <header class="main-header flex space-between align-center">
         <h2 class="header-logo">MemeGEN</h2>
         <nav>
@@ -19,10 +19,10 @@
         </nav>
     </header>
     <main class="main-content">
-        <section class="gallery grid-container" style="display:none" >  
+        <section class="gallery grid-container" >  
         </section>
-        <section class="memegen">
-            <div class="canvas-container">
+        <section class="memegen flex">
+            <div class="canvas-container flex align-center justify-center">
                 <canvas id="my-canvas"></canvas>
             </div>
             <div class="drawing-controller"></div>

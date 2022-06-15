@@ -1,4 +1,5 @@
 'use strict'
+var gSelectedImage = null
 
 var gImageSrcs = [
     '1.jpg', '2.jpg', '3.jpg',
@@ -11,4 +12,13 @@ var gImageSrcs = [
 
 function getImagesSrcs() {
     return gImageSrcs
+}
+
+function setSelectedImage(img){
+    gSelectedImage = img
+    onMemeGenInit()
+}
+
+function getSelectedImage(){
+    return gSelectedImage
 }

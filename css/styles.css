@@ -11,6 +11,7 @@
 /* COMPONENTS */
 @import 'components/gallery.css';
 @import 'components/memegen.css';
+@import 'components/canvas.css';
 
 /* Media Queries */
 /* @import 'mq/mq.css'; */

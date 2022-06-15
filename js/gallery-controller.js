@@ -1,17 +1,21 @@
 'use strict'
-function onInit(){
+function onGalleryInit() {
     renderImages()
 }
-function renderImages(){
+function renderImages() {
     let imageSrcs = getImagesSrcs()
 
     let strHTML = ''
-    imageSrcs.forEach(src=> strHTML += `<div class="grid-item"><img src="img/${src}" onClick="onImgClk(this)"></div>`)
+    imageSrcs.forEach(src => strHTML += `<div class="grid-item"><img 
+                                        data-src=img/${src} 
+                                        src="img/${src}" 
+                                        onClick="onImgClk(this)">
+                                        </div>`)
 
     let gallery = document.querySelector('.gallery')
     gallery.innerHTML = strHTML
 }
 
-function onImgClk(img){
-    console.log(img);
+function onImgClk(img) {
+    setSelectedImage(img)
 }

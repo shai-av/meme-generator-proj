@@ -1,5 +1,11 @@
 /* --- MemeGen --- */
 .memegen {
     background-color: blue;
-    height: 10px;
+    height: 80vh;
+}
+
+.memegen div{
+    /* flex-basis: 50%; */
+    width:50%;
+    border:1px solid black;
 }
