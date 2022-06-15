@@ -3,13 +3,14 @@ function onGalleryInit() {
     renderImages()
 }
 function renderImages() {
-    let imageSrcs = getImagesSrcs()
+    let images = getImages()
 
     let strHTML = ''
-    imageSrcs.forEach(src => strHTML += `<div class="grid-item"><img 
-                                        data-src=img/${src} 
-                                        src="img/${src}" 
-                                        onClick="onImgClk(this)">
+    images.forEach((img) => strHTML += `<div class="grid-item"><img 
+                                        data-src=img/${img.src} 
+                                        data-tag=
+                                        src="img/${img.src}" 
+                                        onclick="onImgClk(this)">
                                         </div>`)
 
     let gallery = document.querySelector('.gallery')
@@ -18,4 +19,14 @@ function renderImages() {
 
 function onImgClk(img) {
     setSelectedImage(img)
+    hideGallery()
+    showMemeGen()
+    onMemeGenInit()
+}
+
+function hideGallery(){
+    document.querySelector('.gallery').style.display = 'none'
+}
+function showGallery(){
+    document.querySelector('.gallery').style.display = 'grid'
 }

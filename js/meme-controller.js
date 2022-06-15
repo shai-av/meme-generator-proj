@@ -14,7 +14,7 @@ function onMemeGenInit() {
 }
 
 function resizeCanvas() {
-    let elCanvasContainer = document.querySelector('.canvas-container')
+    // let elCanvasContainer = document.querySelector('.canvas-container')
     // gCanvas.width = elCanvasContainer.offsetWidth*0.95
     // gCanvas.height = elCanvasContainer.offsetHeight*0.95
     gCanvas.width = 500
@@ -57,3 +57,34 @@ function renderImg(img) {
     }
     return image
 }
+
+function hideMemeGen(){
+    document.querySelector('.memegen').style.display = 'none'
+}
+function showMemeGen(){
+    document.querySelector('.memegen').style.display = 'flex'
+}
+//--- controller ---
+// function onIncreaseTextSize(){
+//     gCtx.
+// }
+
+// function onDecreaseTextSize(){
+
+// }
+
+// function onStrokeClrChnage(color){
+//     gCtx.strokeStyle = color
+// }
+
+// function onFontClrChange(color){
+//     gCtx.fillStyle = color
+// }
+
+// function createMeme(){
+//     return {
+//         img:getSelectedImage(),
+//         lines:['test','test2'],
+
+//     }
+// }

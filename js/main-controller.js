@@ -1,0 +1,5 @@
+
+function onGalleryClk(){
+    hideMemeGen()
+    showGallery()
+}
