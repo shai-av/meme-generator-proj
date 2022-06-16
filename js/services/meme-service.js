@@ -47,7 +47,7 @@ function createMeme() {
     return meme
 }
 
-function getMeme() {
+function setMeme() {
     gMeme = createMeme()
     setGCurrLine()
     return gMeme
@@ -141,4 +141,8 @@ function setCurrLineIdx(idx) {
 function moveLine(dx,dy){
     gCurrLine.posX += dx
     gCurrLine.posY += dy
+}
+
+function getCurrMeme(){
+    return gMeme
 }

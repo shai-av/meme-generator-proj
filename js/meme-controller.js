@@ -1,15 +1,13 @@
 'use strict'
 var gCanvas
 var gCtx
-var gCurrMeme
 var gDrag = false
 var gStartPos
 
 function onMemeGenInit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
-    gCurrMeme = getMeme()
-
+    setMeme()
     _setLineTextInputVal()
     addListeners()
     resizeCanvas()
@@ -35,7 +33,7 @@ function resizeCanvas() {
 
 function renderCanvas() {
     let image = new Image()
-    image.src = gCurrMeme.image.dataset.src
+    image.src = getCurrMeme().image.dataset.src
     image.onload = () => {
         gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
         renderLinesSetRange()
@@ -61,7 +59,7 @@ function drawRect({ xStart, yStart, xRate, yRate }) {
 }
 
 function renderLinesSetRange() {
-    const lines = gCurrMeme.lines
+    const lines = getCurrMeme().lines
     lines.forEach((line, idx) => {
         if (!line.posX) line.posX = gCanvas.width / 2
         if (!line.posY) line.posY = gCanvas.height / 2
@@ -93,7 +91,7 @@ function addTouchListeners() {
     gCanvas.addEventListener('touchend', onUp)
 }
 
-//--- events ---
+//--- events handlers ---
 function onDown(ev) {
     const pos = getPosFromEv(ev)
     let lineIdx = getClickedLineIdx(pos)
@@ -107,9 +105,6 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-
-
-
     if (gDrag) {
         const pos = getPosFromEv(ev)
         if (isOutOfCanvas(pos)) {
@@ -129,7 +124,7 @@ function onUp() {
 }
 
 function getClickedLineIdx({ posX, posY }) {
-    const lines = gCurrMeme.lines
+    const lines = getCurrMeme().lines
     const lineIdx = lines.findIndex(({ range }) => {
         return posX >= range.xStart && posX <= range.xStart + range.xRate &&
             posY >= range.yStart && posY <= range.yStart + range.yRate
@@ -272,6 +267,6 @@ function onTextChange(val) {
 }
 
 function _isLines() {
-    return gCurrMeme.lines.length !== 0
+    return getCurrMeme().lines.length !== 0
 }
 
