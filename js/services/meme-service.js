@@ -1,22 +1,22 @@
 'use strict'
 var testLine = {
-    text: 'hello',
+    text: 'Text Here',
     font: 'Impact',
     size: 35,
     align: 'center',
-    color: 'white',
-    strokeColor: 'black',
+    color: '#ffffff',
+    strokeColor: '#000000',
     posX: undefined,
     posY: 30,
 }
 
 var testLine2 = {
-    text: 'bye',
+    text: 'Text Here',
     font: 'Impact',
     size: 35,
     align: 'center',
-    color: 'white',
-    strokeColor: 'black',
+    color: '#ffffff',
+    strokeColor: '#000000',
     posX: undefined,
     posY: 465
 }
@@ -26,8 +26,8 @@ var demoLine = {
     font: 'Impact',
     size: 40,
     align: 'center',
-    color: 'white',
-    strokeColor: 'black',
+    color: '#ffffff',
+    strokeColor: '#000000',
     posX: undefined,
     posY: undefined
 }

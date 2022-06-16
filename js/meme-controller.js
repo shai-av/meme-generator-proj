@@ -56,7 +56,7 @@ function addListeners() {
 
 
 //--- Drawing ---
-function drawText({ strokeColor, color, size, font, align, text, posX = gCanvas.width / 2, posY = gCanvas.height/2 }) {
+function drawText({ strokeColor, color, size, font, align, text, posX = gCanvas.width / 2, posY = gCanvas.height / 2 }) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
@@ -66,10 +66,10 @@ function drawText({ strokeColor, color, size, font, align, text, posX = gCanvas.
     gCtx.strokeText(text, posX, posY)
 }
 
-function drawRect({ posX = gCanvas.width / 2,posY = gCanvas.height/2, size, text }) {
+function drawRect({ posX = gCanvas.width / 2, posY = gCanvas.height / 2, size, text }) {
     gCtx.beginPath()
     gCtx.strokeStyle = 'black'
-    gCtx.rect(posX-text.length*size/2-3, posY - size*1.2, text.length*size+3, size*1.5)
+    gCtx.rect(posX - text.length * size / 2 - 3, posY - size * 1.2, text.length * size + 3, size * 1.5)
     gCtx.stroke()
 }
 
@@ -111,6 +111,7 @@ function onMovePrevLine() {
     setPrevLine()
     _setLineTextInputVal()
     renderCanvas()
+    _setControllerValuesByLine()
 }
 
 function onMoveNextLine() {
@@ -118,6 +119,7 @@ function onMoveNextLine() {
     setNextLine()
     _setLineTextInputVal()
     renderCanvas()
+    _setControllerValuesByLine()
 }
 
 function onAlign(dir) {
@@ -132,6 +134,7 @@ function onAdd() {
     _setLineTextInputVal()
     renderLines()
     elLineTxtInput.focus()
+    _setControllerValuesByLine()
 }
 
 function onDelete() {
@@ -139,6 +142,7 @@ function onDelete() {
     deleteLine()
     renderCanvas()
     _setLineTextInputVal()
+    _setControllerValuesByLine()
 }
 
 function onFontChange(font) {
@@ -163,7 +167,11 @@ function _setLineTextInputVal() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
     if (!_isLines()) {
         elLineTxtInput.value = 'press +Add'
-    } else elLineTxtInput.value = getCurrLine().text
+        elLineTxtInput.disabled = true
+    } else {
+        elLineTxtInput.disabled = false
+        elLineTxtInput.value = getCurrLine().text
+    }
 }
 
 function _isNoLineSelected() {
@@ -186,4 +194,16 @@ function hideMemeGen() {
 
 function showMemeGen() {
     document.querySelector('.memegen').style.display = 'flex'
+}
+
+function _setControllerValuesByLine() {
+    if (!_isLines()) return
+    const elFontClr = document.querySelector('[name=font-color]')
+    const elStrokeClr = document.querySelector('[name=stroke-color]')
+    const elfont = document.querySelector('[name=font-select]')
+    const line = getCurrLine()
+
+    elFontClr.value = line.color
+    elStrokeClr.value = line.strokeColor
+    elfont.value = line.font
 }
