@@ -247,6 +247,7 @@ function _setLineTextInputVal() {
             elLineTxtInput.disabled = true
         }else {
              elLineTxtInput.disabled = false
+             console.log(getCurrLineIdx())
         elLineTxtInput.value = getCurrLine().text
         }
     }

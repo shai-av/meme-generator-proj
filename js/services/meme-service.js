@@ -81,7 +81,7 @@ function setFont(font) {
 }
 
 function setPrevLine() {
-    gMeme.currLine = (gMeme.currLine === 0) ? gMeme.lines.length - 1 : --gMeme.currLine
+    gMeme.currLine = (gMeme.currLine <= 0) ? gMeme.lines.length - 1 : --gMeme.currLine
     setGCurrLine()
 }
 
