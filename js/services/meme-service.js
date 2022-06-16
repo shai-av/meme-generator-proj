@@ -1,35 +1,35 @@
 'use strict'
 var testLine = {
     text: 'hello',
-    size: 20,
     font: 'Impact',
-    align: 'left',
+    size: 35,
+    align: 'center',
     color: 'white',
     strokeColor: 'black',
-    posX: 100,
-    posY: 450
+    posX: undefined,
+    posY: 30,
 }
 
 var testLine2 = {
     text: 'bye',
-    size: 40,
-    align: 'right',
+    font: 'Impact',
+    size: 35,
+    align: 'center',
     color: 'white',
     strokeColor: 'black',
-    posX: 250,
-    posY: 250,
-    font: 'Impact'
+    posX: undefined,
+    posY: 465
 }
 
 var demoLine = {
-    text: 'bye',
+    text: '',
+    font: 'Impact',
     size: 40,
-    align: 'right',
+    align: 'center',
     color: 'white',
     strokeColor: 'black',
-    posX: 250,
-    posY: 250,
-    font: 'Impact'
+    posX: undefined,
+    posY: undefined
 }
 
 var gMeme
@@ -60,7 +60,6 @@ function increaseTextSize(x = 5) {
 function decreaseTextSize(x = 5) {
     let size = gCurrLine.size
     if (size > 5) gCurrLine.size -= x
-    else return
 }
 function setStrokeColor(color) {
     gCurrLine.strokeColor = color
@@ -68,6 +67,14 @@ function setStrokeColor(color) {
 
 function setFontColor(color) {
     gCurrLine.color = color
+}
+
+function setTextAlign(dir){
+    gCurrLine.align = dir
+}
+
+function setFont(font){
+    gCurrLine.font = font
 }
 
 function setPrevLine() {
@@ -80,27 +87,31 @@ function setNextLine() {
     setGCurrLine()
 }
 
-function _setLastLine() {
-    gMeme.currLine = gMeme.lines.length - 1
-    setGCurrLine()
+function _setLastIdx() {
+    gMeme.currLine = gMeme.lines.length - 1 
+    setGCurrLine()  /// if lines[] empty , set currLine to -1
 }
 
 function getCurrLine() {
     return gCurrLine
 }
 
-function addLine(text) {
+function addLine() {
     let newLine
     if (gMeme.lines.length === 0) {
         newLine = JSON.parse(JSON.stringify(demoLine))
     } else newLine = JSON.parse(JSON.stringify(gCurrLine))
-    newLine.text = text
+    newLine.text = ''
     gMeme.lines.push(newLine)
-    _setLastLine()
+    _setLastIdx()
 }
 
 function deleteLine() {
     gMeme.lines.splice(gMeme.currLine, 1)
-    if (gMeme.currLine === gMeme.lines.length) _setLastLine()
+    if (gMeme.currLine === gMeme.lines.length) _setLastIdx()
     setGCurrLine()
+}
+
+function setText(val){
+    gCurrLine.text = val
 }

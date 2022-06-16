@@ -9,7 +9,7 @@ function onMemeGenInit() {
     gCtx = gCanvas.getContext('2d')
     gCurrMeme = getMeme()
 
-    setLineTextInputVal()
+    _setLineTextInputVal()
     addListeners()
     resizeCanvas()
     renderCanvas()
@@ -54,103 +54,136 @@ function addListeners() {
 //     gCanvas.addEventListener('touchend', onUp)
 // }
 
-function hideMemeGen() {
-    document.querySelector('.memegen').style.display = 'none'
+
+//--- Drawing ---
+function drawText({ strokeColor, color, size, font, align, text, posX = gCanvas.width / 2, posY = gCanvas.height/2 }) {
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = strokeColor
+    gCtx.fillStyle = color
+    gCtx.font = `${size}px ${font}`
+    gCtx.textAlign = align
+    gCtx.fillText(text, posX, posY)
+    gCtx.strokeText(text, posX, posY)
 }
 
-function showMemeGen() {
-    document.querySelector('.memegen').style.display = 'flex'
-}
-
-function drawText({ strokeColor, color, size, font, text, posX, posY }) {
-    gCtx.lineWidth = 2;
-    gCtx.strokeStyle = strokeColor;
-    gCtx.fillStyle = color;
-    gCtx.font = `${size}px ${font}`;
-    gCtx.fillText(text, posX, posY);
-    gCtx.strokeText(text, posX, posY);
-}
-
-function drawRect({posX,posY,size,text}) {
-    gCtx.beginPath();
-    gCtx.strokeStyle = 'white'
-    gCtx.rect(posX-size/4, posY-size,  text.length*size*0.6,(size+10));
-    gCtx.stroke();
+function drawRect({ posX = gCanvas.width / 2,posY = gCanvas.height/2, size, text }) {
+    gCtx.beginPath()
+    gCtx.strokeStyle = 'black'
+    gCtx.rect(posX-text.length*size/2-3, posY - size*1.2, text.length*size+3, size*1.5)
+    gCtx.stroke()
 }
 
 function renderLines() {
-    gCurrMeme.lines.forEach(line => {
-        if(gCurrLine === line) drawRect(line);
+    const lines = gCurrMeme.lines
+    lines.forEach((line, idx) => {
+        if (gCurrMeme.currLine === idx) drawRect(line)
         drawText(line)
     })
 }
 
 //--- controller ---
 function onIncreaseTextSize() {
-    if(!LinesExist()) return
+    if (_isNoLineSelected()) return
     increaseTextSize()
     renderCanvas()
 }
 
 function onDecreaseTextSize() {
-    if(!LinesExist()) return
+    if (_isNoLineSelected()) return
     decreaseTextSize()
     renderCanvas()
 }
 
 function onStrokeClrChnage(color) {
-    if(!LinesExist()) return
+    if (_isNoLineSelected()) return
     setStrokeColor(color)
     renderCanvas()
 }
 
 function onFontClrChange(color) {
-    if(!LinesExist()) return
+    if (_isNoLineSelected()) return
     setFontColor(color)
     renderCanvas()
 }
 
 function onMovePrevLine() {
-    if(!LinesExist()) return
+    if (!_isLines()) return
     setPrevLine()
-    setLineTextInputVal()
+    _setLineTextInputVal()
     renderCanvas()
 }
 
 function onMoveNextLine() {
-    if(!LinesExist()) return
+    if (!_isLines()) return
     setNextLine()
-    setLineTextInputVal()
+    _setLineTextInputVal()
     renderCanvas()
 }
 
-function setLineTextInputVal() {
-    let elLineTxtInput = document.querySelector('[name=line-text]')
-    if (gCurrMeme.lines.length === 0) {
-        elLineTxtInput.value = 'Enter Text Here'
-    } else elLineTxtInput.value = getCurrLine().text
+function onAlign(dir) {
+    if (_isNoLineSelected()) return
+    setTextAlign(dir)
+    renderCanvas()
 }
 
 function onAdd() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
     addLine(elLineTxtInput.value + '')
-    setLineTextInputVal()
+    _setLineTextInputVal()
     renderLines()
+    elLineTxtInput.focus()
 }
 
 function onDelete() {
-    if(!LinesExist()) return
+    if (_isNoLineSelected()) return
     deleteLine()
     renderCanvas()
-    setLineTextInputVal()
+    _setLineTextInputVal()
 }
 
-function downloadCanvas(elLink) {
-    const data = gCanvas.toDataURL()
-    elLink.href = data
-    elLink.download = 'my-img.jpg'
+function onFontChange(font) {
+    setFont(font)
+    renderCanvas()
 }
 
-function LinesExist(){
+function _downloadCanvas(elLink) {
+    const tempLineIdx = gCurrMeme.currLine
+    gCurrMeme.currLine = -1
+    renderCanvas()
+    setTimeout(() => {
+        const data = gCanvas.toDataURL()
+        elLink.href = data
+        elLink.download = 'my-img.jpg'
+        gCurrMeme.currLine = tempLineIdx
+        renderCanvas()
+    }, 1000 * 1)
+}
+
+function _setLineTextInputVal() {
+    let elLineTxtInput = document.querySelector('[name=line-text]')
+    if (!_isLines()) {
+        elLineTxtInput.value = 'press +Add'
+    } else elLineTxtInput.value = getCurrLine().text
+}
+
+function _isNoLineSelected() {
+    return gCurrMeme.currLine === -1
+}
+
+function _isLines() {
     return gCurrMeme.lines.length !== 0
+}
+
+function onTextChange(val) {
+    if (!_isLines()) return
+    setText(val)
+    renderCanvas()
+}
+
+function hideMemeGen() {
+    document.querySelector('.memegen').style.display = 'none'
+}
+
+function showMemeGen() {
+    document.querySelector('.memegen').style.display = 'flex'
 }
