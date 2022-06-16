@@ -16,6 +16,15 @@ function onMemeGenInit() {
     renderCanvas()
 }
 
+function hideMemeGen() {
+    document.querySelector('.memegen').style.display = 'none'
+}
+
+function showMemeGen() {
+    document.querySelector('.memegen').style.display = 'flex'
+}
+
+//--- Canvas ---
 function resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
     // gCanvas.width = elCanvasContainer.offsetWidth * 0.95
@@ -28,83 +37,10 @@ function renderCanvas() {
     let image = new Image()
     image.src = gCurrMeme.image.dataset.src
     image.onload = () => {
-        gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height) 
+        gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
         renderLinesSetRange()
     }
 }
-
-//--- listeners ---
-function addListeners() {
-    addMouseListeners()
-    addTouchListeners()
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderCanvas()
-    })
-}
-
-function addMouseListeners() {
-    gCanvas.addEventListener('mousemove', onMove)
-    gCanvas.addEventListener('mousedown', onDown)
-    gCanvas.addEventListener('mouseup', onUp)
-}
-
-function addTouchListeners() {
-    gCanvas.addEventListener('touchmove', onMove)
-    gCanvas.addEventListener('touchstart', onDown)
-    gCanvas.addEventListener('touchend', onUp)
-}
-
-function onDown(ev) {
-    const pos = getPosFromEv(ev)
-    let lineIdx = getClickedLineIdx(pos)
-    if (lineIdx !== -1) {
-        setCurrLineIdx(lineIdx)
-        renderCanvas()
-        gDrag = true
-        gStartPos = pos
-    }
-}
-
-function getClickedLineIdx({ posX, posY }) {
-    const lines = gCurrMeme.lines
-    const lineIdx = lines.findIndex(({ range }) => {
-        return posX >= range.xStart && posX <= range.xStart + range.xRate &&
-            posY >= range.yStart && posY <= range.yStart + range.yRate
-    })
-    return lineIdx 
-}
-
-function onMove(ev) {
-    if (gDrag) {
-        const pos = getPosFromEv(ev)
-        const dx = pos.posX - gStartPos.posX
-        const dy = pos.posY - gStartPos.posY
-        moveLine(dx,dy)
-        gStartPos = pos
-        renderCanvas()
-    }
-}
-
-function onUp() {
-    gDrag = false
-}
-
-function getPosFromEv(ev) {
-    let posX
-    let posY
-    if (ev.type.includes('touch')) {
-        ev.preventDefault()
-        ev = ev.changedTouches[0]
-        posX = ev.pageX - ev.target.offsetLeft - ev.target.clientLeft
-        posY = ev.pageY - ev.target.offsetTop - ev.target.clientTop
-    } else {
-        posX = ev.offsetX
-        posY = ev.offsetY
-    }
-    return { posX, posY }
-}
-
 
 //--- Drawing ---
 function drawText({ strokeColor, color, size, font, align, text, posX, posY }) {
@@ -133,6 +69,91 @@ function renderLinesSetRange() {
         setRange(line, line)
         if (getCurrLineIdx() === idx) drawRect(line.range)
     })
+}
+
+//--- listeners ---
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        renderCanvas()
+    })
+}
+
+function addMouseListeners() {
+    gCanvas.addEventListener('mousemove', onMove)
+    gCanvas.addEventListener('mousedown', onDown)
+    gCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gCanvas.addEventListener('touchmove', onMove)
+    gCanvas.addEventListener('touchstart', onDown)
+    gCanvas.addEventListener('touchend', onUp)
+}
+
+//--- events ---
+function onDown(ev) {
+    const pos = getPosFromEv(ev)
+    let lineIdx = getClickedLineIdx(pos)
+    if (lineIdx !== -1) {
+        setCurrLineIdx(lineIdx)
+        _setControllerValuesByLine()
+        renderCanvas()
+        gDrag = true
+        gStartPos = pos
+    }
+}
+
+function onMove(ev) {
+
+
+
+    if (gDrag) {
+        const pos = getPosFromEv(ev)
+        if (isOutOfCanvas(pos)) {
+            onUp()
+            return
+        }
+        const dx = pos.posX - gStartPos.posX
+        const dy = pos.posY - gStartPos.posY
+        moveLine(dx, dy)
+        gStartPos = pos
+        renderCanvas()
+    }
+}
+
+function onUp() {
+    gDrag = false
+}
+
+function getClickedLineIdx({ posX, posY }) {
+    const lines = gCurrMeme.lines
+    const lineIdx = lines.findIndex(({ range }) => {
+        return posX >= range.xStart && posX <= range.xStart + range.xRate &&
+            posY >= range.yStart && posY <= range.yStart + range.yRate
+    })
+    return lineIdx
+}
+
+function getPosFromEv(ev) {
+    let posX
+    let posY
+    if (ev.type.includes('touch')) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        posX = ev.pageX - ev.target.offsetLeft - ev.target.clientLeft
+        posY = ev.pageY - ev.target.offsetTop - ev.target.clientTop
+    } else {
+        posX = ev.offsetX
+        posY = ev.offsetY
+    }
+    return { posX, posY }
+}
+
+function isOutOfCanvas({ posX, posY }) {
+    return (posX <= -1 || posY <= -1 || posX >= gCanvas.width - 1 || posY >= gCanvas.height - 1)
 }
 
 //--- controller ---
@@ -228,28 +249,6 @@ function _setLineTextInputVal() {
     }
 }
 
-function _isNoLineSelected() {
-    return getCurrLineIdx() === -1
-}
-
-function _isLines() {
-    return gCurrMeme.lines.length !== 0
-}
-
-function onTextChange(val) {
-    if (!_isLines()) return
-    setText(val)
-    renderCanvas()
-}
-
-function hideMemeGen() {
-    document.querySelector('.memegen').style.display = 'none'
-}
-
-function showMemeGen() {
-    document.querySelector('.memegen').style.display = 'flex'
-}
-
 function _setControllerValuesByLine() {
     if (!_isLines()) return
     const elFontClr = document.querySelector('[name=font-color]')
@@ -260,5 +259,19 @@ function _setControllerValuesByLine() {
     elFontClr.value = line.color
     elStrokeClr.value = line.strokeColor
     elfont.value = line.font
+}
+
+function _isNoLineSelected() {
+    return getCurrLineIdx() === -1
+}
+
+function onTextChange(val) {
+    if (!_isLines()) return
+    setText(val)
+    renderCanvas()
+}
+
+function _isLines() {
+    return gCurrMeme.lines.length !== 0
 }
 
