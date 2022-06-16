@@ -206,6 +206,7 @@ function onAdd() {
     renderLinesSetRange()
     elLineTxtInput.focus()
     _setControllerValuesByLine()
+    renderCanvas()
 }
 
 function onDelete() {
