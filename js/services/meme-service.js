@@ -1,6 +1,6 @@
 'use strict'
 var testLine = {
-    text: 'Text Here',
+    text: 'Text Here1',
     font: 'Impact',
     size: 35,
     align: 'center',
@@ -8,17 +8,19 @@ var testLine = {
     strokeColor: '#000000',
     posX: undefined,
     posY: 30,
+    range: {}
 }
 
 var testLine2 = {
-    text: 'Text Here',
+    text: 'Text Here2',
     font: 'Impact',
     size: 35,
     align: 'center',
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
-    posY: 465
+    posY: 465,
+    range: {}
 }
 
 var demoLine = {
@@ -29,7 +31,8 @@ var demoLine = {
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
-    posY: undefined
+    posY: undefined,
+    range: {}
 }
 
 var gMeme
@@ -69,11 +72,11 @@ function setFontColor(color) {
     gCurrLine.color = color
 }
 
-function setTextAlign(dir){
+function setTextAlign(dir) {
     gCurrLine.align = dir
 }
 
-function setFont(font){
+function setFont(font) {
     gCurrLine.font = font
 }
 
@@ -88,7 +91,7 @@ function setNextLine() {
 }
 
 function _setLastIdx() {
-    gMeme.currLine = gMeme.lines.length - 1 
+    gMeme.currLine = gMeme.lines.length - 1
     setGCurrLine()  /// if lines[] empty , set currLine to -1
 }
 
@@ -102,6 +105,7 @@ function addLine() {
         newLine = JSON.parse(JSON.stringify(demoLine))
     } else newLine = JSON.parse(JSON.stringify(gCurrLine))
     newLine.text = ''
+    newLine.posY = undefined
     gMeme.lines.push(newLine)
     _setLastIdx()
 }
@@ -112,6 +116,29 @@ function deleteLine() {
     setGCurrLine()
 }
 
-function setText(val){
+function setText(val) {
     gCurrLine.text = val
+}
+
+function setRange(line, { posX, posY, text, size }) {
+    line.range = {
+        xStart: posX - text.length * size / 2 - 3,
+        yStart: posY - size * 1.2,
+        xRate: text.length * size + 3,
+        yRate: size * 1.5
+    }
+}
+
+function getCurrLineIdx() {
+    return gMeme.currLine
+}
+
+function setCurrLineIdx(idx) {
+    gMeme.currLine = idx
+    if (idx === -1) return
+    setGCurrLine()
+}
+function moveLine(dx,dy){
+    gCurrLine.posX += dx
+    gCurrLine.posY += dy
 }
