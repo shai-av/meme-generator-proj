@@ -98,10 +98,11 @@ function onDown(ev) {
     if (lineIdx !== -1) {
         setCurrLineIdx(lineIdx)
         _setControllerValuesByLine()
+        _setLineTextInputVal()
         renderCanvas()
         gDrag = true
         gStartPos = pos
-    }
+    } else setCurrLineIdx(-1), renderCanvas(), _setLineTextInputVal()
 }
 
 function onMove(ev) {
@@ -224,23 +225,29 @@ function _downloadCanvas(elLink) {
     const tempLineIdx = getCurrLineIdx()
     setCurrLineIdx(-1)
     renderCanvas()
+    const data = gCanvas.toDataURL() 
+    elLink.href = data
+    elLink.download = 'my-img.jgp'
     setTimeout(() => {
-        const data = gCanvas.toDataURL()
-        elLink.href = data
-        elLink.download = 'my-img.jpg'
         setCurrLineIdx(tempLineIdx)
         renderCanvas()
     }, 1000 * 1)
 }
-
+  
 function _setLineTextInputVal() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
+
     if (!_isLines()) {
         elLineTxtInput.value = 'press +Add'
         elLineTxtInput.disabled = true
     } else {
-        elLineTxtInput.disabled = false
+        if (getCurrLineIdx() === -1) {
+            elLineTxtInput.value = 'no line selected'
+            elLineTxtInput.disabled = true
+        }else {
+             elLineTxtInput.disabled = false
         elLineTxtInput.value = getCurrLine().text
+        }
     }
 }
 

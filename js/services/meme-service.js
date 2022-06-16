@@ -7,7 +7,7 @@ var testLine = {
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
-    posY: 30,
+    posY: 50,
     range: {}
 }
 
