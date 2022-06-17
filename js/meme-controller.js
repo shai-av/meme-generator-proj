@@ -22,7 +22,7 @@ function showMemeGen() {
     document.querySelector('.memegen').style.display = 'flex'
 }
 
-function getContext(){
+function getContext() {
     return gCtx
 }
 //--- Canvas ---
@@ -69,14 +69,14 @@ function renderLinesSetRange() {
         if (!line.posY) line.posY = gCanvas.height / 2
         drawText(line)
         setRange(line, line)
-        if (getCurrLineIdx() === idx) drawRect(line.range),drawArc(line.range)
+        if (getCurrLineIdx() === idx) drawRect(line.range), drawArc(line.range)
     })
 }
 
 function drawArc({ xStart, yStart, xRate, yRate }) {
     gCtx.beginPath()
     gCtx.lineWidth = '2'
-    gCtx.arc(xStart+xRate, yStart+yRate, 5, 0, 2 * Math.PI)
+    gCtx.arc(xStart + xRate, yStart + yRate, 5, 0, 2 * Math.PI)
     gCtx.strokeStyle = 'white'
     gCtx.stroke()
     gCtx.fillStyle = 'lightgreen'
@@ -112,12 +112,12 @@ function addTouchListeners() {
     gCanvas.addEventListener('touchend', onUp)
 }
 
-function addDownloadBtnListenesrs(){
+function addDownloadBtnListenesrs() {
     const elDownload = document.querySelector('.download-link')
-    elDownload.addEventListener('mousedown',clearLineFrame)
+    elDownload.addEventListener('mousedown', clearLineFrame)
     elDownload.addEventListener('touchstart', clearLineFrame)
 }
-function clearLineFrame(){
+function clearLineFrame() {
     setCurrLineIdx(-1)
     renderCanvas()
     setGCurrLine()
@@ -149,7 +149,7 @@ function onMove(ev) {
 }
 
 function onUp() {
-    gDrag = false
+    if (gDrag) gDrag = false
 }
 
 function getClickedLineIdx({ posX, posY }) {
@@ -175,6 +175,10 @@ function getPosFromEv(ev) {
     }
     return { posX, posY }
 }
+// function isOutOfCanvas({target},{posX,posY}){
+//      return posX<=target.offsetLeft || posX>= target.offsetLeft+target.offsetWidth
+//             posY<=
+// }
 
 //--- controller ---
 function onIncreaseTextSize() {
