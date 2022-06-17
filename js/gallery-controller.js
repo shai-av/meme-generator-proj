@@ -2,6 +2,7 @@
 function onGalleryInit() {
     renderImages()
 }
+
 function renderImages() {
     let images = getImages()
 
@@ -28,6 +29,17 @@ function hideGallery(){
     document.body.classList.remove('gallery-open')
 }
 function showGallery(){
-    document.querySelector('.gallery-container').style.display = 'grid'
+    document.querySelector('.gallery-container').style.display = 'block'
     document.body.classList.add('gallery-open')
+    resetDefaultLines()
+}
+
+function onSearchIcon(){
+    const elSearchInput = document.querySelector('[name=search-img]')
+    elSearchInput.focus()
+}
+
+function onFilter(val){
+    setFilterBy(val.toLowerCase())
+    renderImages()
 }

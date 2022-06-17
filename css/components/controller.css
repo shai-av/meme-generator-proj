@@ -5,7 +5,9 @@
     border-radius: 1em;
     padding: 5.5px 5px 5px 5.5px;
 }
-
+.controller-item:active{
+    background-color: var(--clr5);
+}
 .controller-item img {
     object-fit: contain;
 }
@@ -14,13 +16,15 @@
     display: grid;
 
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(7,1fr);
     grid-template-areas:
         "txt-input txt-input txt-input txt-input txt-input"
         "arrow-up arrow-down . add-line del"
-        "txt-plus txt-minus . dw dw"
+        "txt-plus txt-minus align-left align-center align-right"
         "font-select font-select font-select stroke-clr font-clr"
-        ". . . . ."
+        "emojs emojs emojs emojs emojs"
+        "emojs emojs emojs emojs emojs"
+        "save-btn save-btn . dw-btn dw-btn"
     ;
     gap: 1em;
 }
@@ -73,20 +77,43 @@
 .font-clr {
     grid-area: font-clr;
 }
+.align-left{
+    grid-area: align-left;
+}
+.align-center{
+    grid-area: align-center;
+}
+.align-right{
+    grid-area: align-right;
+}
 
-.dw {
-    grid-area: dw;
+.emojs{
+    grid-area: emojs;
+    font-size: 3.3em;
+    background-color: var(--clr1);
+    border-radius: 0.2em;
+}
+.emojs span{
+    cursor: pointer;
+}
+
+.drawing-controller button{
     width: 100%;
     height: 100%;
     font-size: 1.25em;
+    color: var(--clr1);
     background-color: var(--clr3);
 }
 
-.dw a {
+.dw-btn {
+    grid-area: dw-btn;
+}
+
+.dw-btn a {
     color: var(--clr1);
     text-decoration: none;
 }
 
-.font-select option:hover {
-    background-color: yellow;
+.save-btn{
+    grid-area: save-btn;
 }

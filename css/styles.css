@@ -12,6 +12,7 @@
 @import 'components/header.css';
 @import 'components/logo.css';
 @import 'components/gallery.css';
+@import 'components/gallery-about.css';
 @import 'components/memegen.css';
 @import 'components/canvas.css';
 @import 'components/controller.css';

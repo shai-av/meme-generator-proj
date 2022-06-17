@@ -27,7 +27,26 @@
     </header>
     <main class="main-content">
         <section class="gallery-container">
-            <div class="gallery grid-container main-layout"></div>
+            <section class="search-image-container main-layout flex align-center">
+                <input type="text" name="search-img" class="search-image" placeholder="Enter search keyword"
+                    oninput="onFilter(this.value)" spellcheck="false">
+                <div onclick="onSearchIcon()"><img src="/DESIGN/ICONS/search-icon.png"></div>
+            </section>
+            <div class="gallery grid-container main-layout">
+            </div>
+            <section class="gallery-about flex justify-center">
+                <div class="pic"></div>
+                <div class="txt">
+                    <h2>Monica Geller</h2>
+                    <p>
+                        is a fictional character, one of the six main characters who appears on the American sitcom
+                        Friends
+                        (1994–2004). Created by David Crane and Marta Kauffman
+                    </p>
+                    <img src="/DESIGN/demo-social.svg">
+                </div>
+
+            </section>
         </section>
         <section class="memegen" style="display:none">
             <div class="memegen-container main-layout flex">
@@ -36,18 +55,36 @@
                 </div>
                 <div class="controller-container flex align-center justify-center">
                     <div class="drawing-controller">
-                        <input class="txt-input" type="text" name="line-text" placeholder="Enter Text Here"
-                           spellcheck="false" onkeyup="onTextChange(this.value)">
+                        <input class="txt-input" type="text" name="line-text" spellcheck="false"
+                            placeholder="Enter Text Here" onkeyup="onTextChange(this.value)">
                         <div class="controller-item arrow-up" onclick="onMovePrevLine()">
-                            <img src="DESIGN/ICONS/arrow-up-solid.svg"></div>
+                            <img src="DESIGN/ICONS/arrow-up-solid.svg">
+                        </div>
                         <div class="controller-item arrow-down" onclick="onMoveNextLine()">
-                            <img src="DESIGN/ICONS/arrow-down-solid.svg"></div>
+                            <img src="DESIGN/ICONS/arrow-down-solid.svg">
+                        </div>
                         <div class="controller-item add-line" onclick="onAdd()">
-                            <img src="DESIGN/ICONS/add.png"></div>
+                            <img src="DESIGN/ICONS/add.png">
+                        </div>
                         <div class="controller-item del" onclick="onDelete()">
-                            <img src="DESIGN/ICONS/trash.png"></div>
-                        <div class="controller-item txt-plus" onclick="onIncreaseTextSize()"><img src="DESIGN/ICONS/increase font - icon.png"></div>
-                        <div class="controller-item txt-minus" onclick="onDecreaseTextSize()"><img src="DESIGN/ICONS/decrease font - icon.png"></div>
+                            <img src="DESIGN/ICONS/trash.png">
+                        </div>
+                        <div class="controller-item txt-plus" onclick="onIncreaseTextSize()">
+                            <img src="DESIGN/ICONS/increase font - icon.png">
+                        </div>
+                        <div class="controller-item txt-minus" onclick="onDecreaseTextSize()">
+                            <img src="DESIGN/ICONS/decrease font - icon.png">
+                        </div>
+                        <div class="controller-item align-left" onclick="onAlign('left')">
+                            <img src="DESIGN/ICONS/align-to-left.png">
+                        </div>
+                        <div class="controller-item align-center" onclick="onAlign('center')">
+                            <img src="DESIGN/ICONS/center-text-alignment.png">
+                        </div>
+                        <div class="controller-item align-right" onclick="onAlign('right')">
+                            <img src="DESIGN/ICONS/align-to-right.png">
+                        </div>
+
                         <select class="font-select" name="font-select" onchange="onFontChange(this.value)">
                             <option value="Impact">Impact</option>
                             <option value="Ariel">Ariel</option>
@@ -57,8 +94,14 @@
                             onchange="onStrokeClrChnage(this.value)">
                         <input class="controller-item font-clr" title="font" type="color" name="font-color"
                             onchange="onFontClrChange(this.value)">
-                        <button class="controller-item dw"><a href="#" class="download-link"
+                        <div class="emojs flex space-evenly align-center">
+                            <span onclick="onAdd('😁')">😁</span>
+                            <span onclick="onAdd('😎')">😎</span>
+                            <span onclick="onAdd('😖')">😖</span>
+                        </div>
+                        <button class="controller-item dw-btn"><a href="#" class="download-link"
                                 onclick="_downloadCanvas(this)" download="temp">Download</a></button>
+                        <button class="controller-item save-btn">Save</button>
                     </div>
                 </div>
             </div>
@@ -68,7 +111,6 @@
         <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png"></div>
         <small>&copy; all rights reserved 2022 </small>
     </footer>
-
 
     <script src="js/services/gallery-service.js"></script>
     <script src="js/gallery-controller.js"></script>

@@ -1,0 +1,43 @@
+.gallery-about{
+    padding-top:2.44em;
+    margin-bottom:5.18em;
+    background-color: var(--clr1);
+    color:var(--clr6);
+}
+
+.gallery-about .pic{
+    width:20%;
+    min-width: 20.125em;
+    height: 20.125em;
+    border-radius: 50%;
+    background-image: url(/DESIGN/demo-pic.svg);
+    background-position: center;
+}
+
+
+
+.gallery-about .txt{
+    flex-basis:40%;
+    line-height: 1.2;
+    padding-left:2.47rem;
+    padding-top:5em;
+}
+.gallery-about .txt p{
+    font-size: 1.25em;
+    font-family: Montserrat-Regular;
+    margin:0;
+    margin-bottom: 1.5em;
+}
+
+.gallery-about .txt h2{
+    font-size:1.5625em;
+    font-family: Montserrat-Bold;
+    margin:0;
+    margin-bottom:0.25em
+}
+
+.gallery-about img{
+    width:132px;
+    height: fit-content;
+    margin-bottom:1.25em;
+}

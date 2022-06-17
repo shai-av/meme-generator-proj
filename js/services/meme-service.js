@@ -1,5 +1,5 @@
 'use strict'
-var testLine = {
+var gDefLine1 = {
     text: 'Text Here1',
     font: 'Impact',
     size: 35,
@@ -10,7 +10,7 @@ var testLine = {
     range: {}
 }
 
-var testLine2 = {
+var gDefLine2 = {
     text: 'Text Here2',
     font: 'Impact',
     size: 35,
@@ -21,7 +21,7 @@ var testLine2 = {
     range: {}
 }
 
-var demoLine = {
+var gDemoLine = {
     text: '',
     font: 'Impact',
     size: 40,
@@ -39,7 +39,7 @@ function createMeme() {
     let meme = {
         image: getSelectedImage(),
         currLine: 0,
-        lines: [testLine, testLine2]
+        lines: [gDefLine1, gDefLine2]
     }
     return meme
 }
@@ -92,12 +92,24 @@ function getCurrLine() {
     return gCurrLine
 }
 
-function addLine() {
+function setAlign(dir){
+    switch (dir){
+        case 'left':
+            gCurrLine.posX = gCurrLine.range.xRate/2
+            break;
+        case 'right':
+            gCurrLine.posX = getCanvas().width - gCurrLine.range.xRate/2
+            console.log('entered');
+            break;
+        default:gCurrLine.posX = getCanvas().width/2
+    }
+}
+function addLine(str ='') {
     let newLine
     if (gMeme.lines.length === 0) {
-        newLine = JSON.parse(JSON.stringify(demoLine))
+        newLine = JSON.parse(JSON.stringify(gDemoLine))
     } else newLine = JSON.parse(JSON.stringify(gCurrLine))
-    newLine.text = ''
+    newLine.text = str
     newLine.posY = undefined
     gMeme.lines.push(newLine)
     _setLastIdx()
@@ -140,4 +152,28 @@ function moveLine(dx,dy){
 
 function getCurrMeme(){
     return gMeme
+}
+
+function resetDefaultLines(){
+    gDefLine1 = {
+        text: 'Text Here1',
+        font: 'Impact',
+        size: 35,
+        color: '#ffffff',
+        strokeColor: '#000000',
+        posX: undefined,
+        posY: 50,
+        range: {}
+    }
+    
+    gDefLine2 = {
+        text: 'Text Here2',
+        font: 'Impact',
+        size: 35,
+        color: '#ffffff',
+        strokeColor: '#000000',
+        posX: undefined,
+        posY: 465,
+        range: {}
+    }
 }

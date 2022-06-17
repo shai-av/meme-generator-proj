@@ -25,6 +25,10 @@ function showMemeGen() {
 function getContext() {
     return gCtx
 }
+
+function getCanvas(){
+    return gCanvas
+}
 //--- Canvas ---
 function resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
@@ -43,7 +47,7 @@ function renderCanvas() {
         gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
         renderLinesSetRange()
     }
-    console.log('entered');
+  
 }
 
 //--- Drawing ---
@@ -224,9 +228,9 @@ function onMoveNextLine() {
     _setControllerValuesByLine()
 }
 
-function onAdd() {
+function onAdd(str = '') {
     let elLineTxtInput = document.querySelector('[name=line-text]')
-    addLine(elLineTxtInput.value + '')
+    addLine(str)
     _setLineTextInputVal()
     renderLinesSetRange()
     elLineTxtInput.focus()
@@ -243,10 +247,16 @@ function onDelete() {
 }
 
 function onFontChange(font) {
+    if (_isNoLineSelected()) return
     setFont(font)
     renderCanvas()
 }
 
+function onAlign(dir){
+    if (_isNoLineSelected()) return
+    setAlign(dir)
+    renderCanvas()
+}
 function _downloadCanvas(elLink) {
     const data = gCanvas.toDataURL();
     elLink.href = data;
