@@ -1,11 +1,14 @@
 /* --- MemeGen --- */
 .memegen {
-    background-color: blue;
+    background-color: var(--clr2);
     height: 80vh;
 }
 
-.memegen div{
+.memegen-container div{
     flex-basis: 50%;
-    /* width:50%; */
     border:1px solid black;
+}
+.memegen-container{
+    padding:1.625em 3.125em;
+    width:100%;
 }

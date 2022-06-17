@@ -24,8 +24,10 @@ function onImgClk(img) {
 }
 
 function hideGallery(){
-    document.querySelector('.gallery').style.display = 'none'
+    document.querySelector('.gallery-container').style.display = 'none'
+    document.body.classList.remove('gallery-open')
 }
 function showGallery(){
-    document.querySelector('.gallery').style.display = 'grid'
+    document.querySelector('.gallery-container').style.display = 'grid'
+    document.body.classList.add('gallery-open')
 }

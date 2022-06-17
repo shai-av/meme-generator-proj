@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,46 +8,62 @@
     <title>memegen</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body onload="onGalleryInit()">
-    <header class="main-header flex space-between align-center">
-        <h2 class="header-logo">MemeGEN</h2>
-        <nav>
-            <ul class="clean-list flex">
-                <li class="nav-btn-gallery" onclick="onGalleryClk()">Gallery</li>
-                <li class="nav-btn-memes">Memes</li>
-                <li class="nav-btn-about">About</li>
-            </ul>
-        </nav>
+
+<body class="gallery-open" onload="onGalleryInit()">
+    <header class="main-header">
+        <div class="main-layout flex space-between align-center">
+            <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png" alt="" srcset=""></div>
+            <nav class="main-nav">
+                <ul class="clean-list flex align-center">
+                    <li><a href="#" onclick="onGalleryClk()"
+                            class="nav-btn-gallery flex align-center justify-center">Gallery</a></li>
+                    <span class="spreader">|</span>
+                    <li><a href="#" class="nav-btn-memes flex align-center justify-center">Memes</a></li>
+                    <span class="spreader">|</span>
+                    <li><a href="#" class="nav-btn-about flex align-center justify-center">About</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main class="main-content">
-        <section class="gallery grid-container" >  
+        <section class="gallery-container">
+            <div class="gallery grid-container main-layout"></div>
         </section>
-        <section class="memegen flex" style="display:none">
-            <div class="canvas-container flex align-center justify-center">
-                <canvas id="my-canvas"></canvas>
-            </div>
-            <div class="controller-container flex align-center justify-center">
-                <div class="drawing-controller">
-                    <input type="text" name="line-text" placeholder="Enter Text Here" onkeyup="onTextChange(this.value)">
-                    <button class="controller-item" onclick="onMovePrevLine()">&UpArrow;</button>
-                    <button class="controller-item" onclick="onMoveNextLine()">&DownArrow;</button>
-                    <button class="controller-item" onclick="onAdd()">&plus; Add</button>
-                    <button class="controller-item" onclick="onDelete()">🗑</button>
-                    <button class="controller-item" onclick="onIncreaseTextSize()">A+</button>
-                    <button class="controller-item" onclick="onDecreaseTextSize()">A -</button>
-                    <select name="font-select" onchange="onFontChange(this.value)">
-                        <option value="Impact">Impact</option>
-                        <option value="Ariel">Ariel</option>
-                        <option value="Comic Sans MS">Comic</option>
-                    </select>
-                    <input class="controller-item" title="stroke" type="color" name="stroke-color" onchange="onStrokeClrChnage(this.value)">
-                    <input class="controller-item" title="font" type="color" name="font-color" onchange="onFontClrChange(this.value)">
-                    <button class="controller-item"><a href="#" class="download-link" onclick="_downloadCanvas(this)" download="temp">Download</a></button>
+        <section class="memegen" style="display:none">
+            <div class="memegen-container main-layout flex">
+                <div class="canvas-container flex align-center justify-center">
+                    <canvas id="my-canvas"></canvas>
+                </div>
+                <div class="controller-container flex align-center justify-center">
+                    <div class="drawing-controller">
+                        <input type="text" name="line-text" placeholder="Enter Text Here"
+                            onkeyup="onTextChange(this.value)">
+                        <button class="controller-item" onclick="onMovePrevLine()">&UpArrow;</button>
+                        <button class="controller-item" onclick="onMoveNextLine()">&DownArrow;</button>
+                        <button class="controller-item" onclick="onAdd()">&plus; Add</button>
+                        <button class="controller-item" onclick="onDelete()">🗑</button>
+                        <button class="controller-item" onclick="onIncreaseTextSize()">A+</button>
+                        <button class="controller-item" onclick="onDecreaseTextSize()">A -</button>
+                        <select name="font-select" onchange="onFontChange(this.value)">
+                            <option value="Impact">Impact</option>
+                            <option value="Ariel">Ariel</option>
+                            <option value="Comic Sans MS">Comic</option>
+                        </select>
+                        <input class="controller-item" title="stroke" type="color" name="stroke-color"
+                            onchange="onStrokeClrChnage(this.value)">
+                        <input class="controller-item" title="font" type="color" name="font-color"
+                            onchange="onFontClrChange(this.value)">
+                        <button class="controller-item"><a href="#" class="download-link"
+                                onclick="_downloadCanvas(this)" download="temp">Download</a></button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer class="main-footer"></footer>
+    <footer class="main-footer flex flex-column justify-center align-center">
+        <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png" alt="" srcset=""></div>
+        <small>&copy; all rights reserved 2022 </small>
+    </footer>
 
 
     <script src="js/services/gallery-service.js"></script>
@@ -55,4 +72,5 @@
     <script src="js/meme-controller.js"></script>
     <script src="js/main-controller.js"></script>
 </body>
+
 </html>

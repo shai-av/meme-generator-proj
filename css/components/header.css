@@ -1,0 +1,24 @@
+.main-header {
+    background-color: var(--clr3);
+}
+
+.main-header .main-nav a {
+    font-family: Montserrat-Regular,sans-serif;
+    font-size: 1.1875rem;
+    line-height: 1.2;
+    height: 4.125rem;
+    text-decoration: none;
+    color:var(--clr1)
+}
+
+.main-header .main-nav a:hover {
+    color:var(--clr4);
+    box-shadow: inset 0px -4px var(--clr4);
+}
+.main-nav span.spreader{
+    margin: 0 0.6rem;
+}
+body.gallery-open a.nav-btn-gallery{
+    color:var(--clr4);
+    box-shadow: inset 0px -4px var(--clr4);
+}

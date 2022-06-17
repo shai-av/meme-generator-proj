@@ -28,9 +28,9 @@ function getContext() {
 //--- Canvas ---
 function resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
-    gCanvas.width = elCanvasContainer.offsetWidth * 0.95
-    // gCanvas.height = elCanvasContainer.offsetHeight * 0.95
-    gCanvas.height = gCanvas.width
+    // gCanvas.width = elCanvasContainer.offsetWidth
+    gCanvas.height = elCanvasContainer.offsetHeight
+    gCanvas.width = gCanvas.height
     // gCanvas.width = 500
     // gCanvas.height = 500
 }
