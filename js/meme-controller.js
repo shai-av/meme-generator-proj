@@ -28,10 +28,11 @@ function getContext(){
 //--- Canvas ---
 function resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
-    // gCanvas.width = elCanvasContainer.offsetWidth * 0.95
+    gCanvas.width = elCanvasContainer.offsetWidth * 0.95
     // gCanvas.height = elCanvasContainer.offsetHeight * 0.95
-    gCanvas.width = 500
-    gCanvas.height = 500
+    gCanvas.height = gCanvas.width
+    // gCanvas.width = 500
+    // gCanvas.height = 500
 }
 
 function renderCanvas() {
@@ -87,6 +88,7 @@ function addListeners() {
     addMouseListeners()
     addTouchListeners()
     addWindowListeners()
+    addDownloadBtnListenesrs()
 }
 
 function addWindowListeners() {
@@ -110,6 +112,17 @@ function addTouchListeners() {
     gCanvas.addEventListener('touchend', onUp)
 }
 
+function addDownloadBtnListenesrs(){
+    const elDownload = document.querySelector('.download-link')
+    elDownload.addEventListener('mousedown',clearLineFrame)
+    elDownload.addEventListener('touchstart', clearLineFrame)
+}
+function clearLineFrame(){
+    setCurrLineIdx(-1)
+    renderCanvas()
+    setGCurrLine()
+    _setLineTextInputVal()
+}
 //--- events handlers ---
 function onDown(ev) {
     const pos = getPosFromEv(ev)
@@ -228,16 +241,9 @@ function onFontChange(font) {
 }
 
 function _downloadCanvas(elLink) {
-    const tempLineIdx = getCurrLineIdx()
-    setCurrLineIdx(-1)
-    renderCanvas()
     const data = gCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'my-img.jpg';
-    setTimeout(() => {
-        setCurrLineIdx(tempLineIdx)
-        renderCanvas()
-    }, 1000 * 1)
 }
 
 function _setLineTextInputVal() {
