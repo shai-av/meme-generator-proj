@@ -6,7 +6,7 @@
 
 .memegen-container div{
     flex-basis: 50%;
-    border:1px solid black;
+    /* border:1px solid black; */
 }
 .memegen-container{
     padding:1.625em 3.125em;

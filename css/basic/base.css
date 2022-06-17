@@ -5,8 +5,15 @@
 html {
     color: var(--clr1);
 }
-
+::selection{
+    color:var(--clr1);
+    background-color: var(--clr5);
+}
 body {
     margin: 0;
     background-color: var(--clr3);
+}
+img{
+    width:100%;
+    height: 100%;
 }

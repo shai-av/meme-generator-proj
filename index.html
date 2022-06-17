@@ -12,7 +12,7 @@
 <body class="gallery-open" onload="onGalleryInit()">
     <header class="main-header">
         <div class="main-layout flex space-between align-center">
-            <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png" alt="" srcset=""></div>
+            <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png"></div>
             <nav class="main-nav">
                 <ul class="clean-list flex align-center">
                     <li><a href="#" onclick="onGalleryClk()"
@@ -36,24 +36,28 @@
                 </div>
                 <div class="controller-container flex align-center justify-center">
                     <div class="drawing-controller">
-                        <input type="text" name="line-text" placeholder="Enter Text Here"
-                            onkeyup="onTextChange(this.value)">
-                        <button class="controller-item" onclick="onMovePrevLine()">&UpArrow;</button>
-                        <button class="controller-item" onclick="onMoveNextLine()">&DownArrow;</button>
-                        <button class="controller-item" onclick="onAdd()">&plus; Add</button>
-                        <button class="controller-item" onclick="onDelete()">🗑</button>
-                        <button class="controller-item" onclick="onIncreaseTextSize()">A+</button>
-                        <button class="controller-item" onclick="onDecreaseTextSize()">A -</button>
-                        <select name="font-select" onchange="onFontChange(this.value)">
+                        <input class="txt-input" type="text" name="line-text" placeholder="Enter Text Here"
+                           spellcheck="false" onkeyup="onTextChange(this.value)">
+                        <div class="controller-item arrow-up" onclick="onMovePrevLine()">
+                            <img src="DESIGN/ICONS/arrow-up-solid.svg"></div>
+                        <div class="controller-item arrow-down" onclick="onMoveNextLine()">
+                            <img src="DESIGN/ICONS/arrow-down-solid.svg"></div>
+                        <div class="controller-item add-line" onclick="onAdd()">
+                            <img src="DESIGN/ICONS/add.png"></div>
+                        <div class="controller-item del" onclick="onDelete()">
+                            <img src="DESIGN/ICONS/trash.png"></div>
+                        <div class="controller-item txt-plus" onclick="onIncreaseTextSize()"><img src="DESIGN/ICONS/increase font - icon.png"></div>
+                        <div class="controller-item txt-minus" onclick="onDecreaseTextSize()"><img src="DESIGN/ICONS/decrease font - icon.png"></div>
+                        <select class="font-select" name="font-select" onchange="onFontChange(this.value)">
                             <option value="Impact">Impact</option>
                             <option value="Ariel">Ariel</option>
                             <option value="Comic Sans MS">Comic</option>
                         </select>
-                        <input class="controller-item" title="stroke" type="color" name="stroke-color"
+                        <input class="controller-item stroke-clr" title="stroke" type="color" name="stroke-color"
                             onchange="onStrokeClrChnage(this.value)">
-                        <input class="controller-item" title="font" type="color" name="font-color"
+                        <input class="controller-item font-clr" title="font" type="color" name="font-color"
                             onchange="onFontClrChange(this.value)">
-                        <button class="controller-item"><a href="#" class="download-link"
+                        <button class="controller-item dw"><a href="#" class="download-link"
                                 onclick="_downloadCanvas(this)" download="temp">Download</a></button>
                     </div>
                 </div>
@@ -61,7 +65,7 @@
         </section>
     </main>
     <footer class="main-footer flex flex-column justify-center align-center">
-        <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png" alt="" srcset=""></div>
+        <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png"></div>
         <small>&copy; all rights reserved 2022 </small>
     </footer>
 

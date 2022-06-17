@@ -1,0 +1,92 @@
+.controller-item {
+    height: 50px;
+    width: 50px;
+    background-color: var(--clr1);
+    border-radius: 1em;
+    padding: 5.5px 5px 5px 5.5px;
+}
+
+.controller-item img {
+    object-fit: contain;
+}
+
+.drawing-controller {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+        "txt-input txt-input txt-input txt-input txt-input"
+        "arrow-up arrow-down . add-line del"
+        "txt-plus txt-minus . dw dw"
+        "font-select font-select font-select stroke-clr font-clr"
+        ". . . . ."
+    ;
+    gap: 1em;
+}
+
+.txt-input {
+    grid-area: txt-input;
+    font-size: 1.25em;
+    background-color: var(--clr3);
+    color: var(--clr1);
+    border-radius: 1em;
+    padding-left: 0.5em;
+}
+
+.arrow-up {
+    grid-area: arrow-up;
+}
+
+.arrow-down {
+    grid-area: arrow-down;
+}
+
+.add-line {
+    grid-area: add-line;
+}
+
+.del {
+    grid-area: del;
+}
+
+.txt-plus {
+    grid-area: txt-plus;
+}
+
+.txt-minus {
+    grid-area: txt-minus;
+}
+
+.font-select {
+    grid-area: font-select;
+    font-size: 1.25em;
+    background-color: var(--clr3);
+    color: var(--clr1);
+    border-radius: 1em;
+}
+
+.stroke-clr {
+    grid-area: stroke-clr;
+}
+
+.font-clr {
+    grid-area: font-clr;
+}
+
+.dw {
+    grid-area: dw;
+    width: 100%;
+    height: 100%;
+    font-size: 1.25em;
+    background-color: var(--clr3);
+}
+
+.dw a {
+    color: var(--clr1);
+    text-decoration: none;
+}
+
+.font-select option:hover {
+    background-color: yellow;
+}

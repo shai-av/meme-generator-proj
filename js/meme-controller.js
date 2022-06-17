@@ -38,10 +38,12 @@ function resizeCanvas() {
 function renderCanvas() {
     let image = new Image()
     image.src = getCurrMeme().image.dataset.src
+    console.log(image);
     image.onload = () => {
         gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
         renderLinesSetRange()
     }
+    console.log('entered');
 }
 
 //--- Drawing ---
@@ -69,6 +71,7 @@ function renderLinesSetRange() {
         if (!line.posY) line.posY = gCanvas.height / 2
         drawText(line)
         setRange(line, line)
+        
         if (getCurrLineIdx() === idx) drawRect(line.range), drawArc(line.range)
     })
 }
@@ -258,7 +261,7 @@ function _setLineTextInputVal() {
         elLineTxtInput.disabled = true
     } else {
         if (getCurrLineIdx() === -1) {
-            elLineTxtInput.value = 'no line selected'
+            elLineTxtInput.value = 'No Line Selected'
             elLineTxtInput.disabled = true
         } else {
             elLineTxtInput.disabled = false
