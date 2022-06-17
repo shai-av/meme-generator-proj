@@ -22,6 +22,9 @@ function showMemeGen() {
     document.querySelector('.memegen').style.display = 'flex'
 }
 
+function getContext(){
+    return gCtx
+}
 //--- Canvas ---
 function resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
@@ -41,12 +44,12 @@ function renderCanvas() {
 }
 
 //--- Drawing ---
-function drawText({ strokeColor, color, size, font, align, text, posX, posY }) {
+function drawText({ strokeColor, color, size, font, text, posX, posY }) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
-    gCtx.textAlign = align
+    gCtx.textAlign = 'center'
     gCtx.fillText(text, posX, posY)
     gCtx.strokeText(text, posX, posY)
 }
@@ -65,18 +68,34 @@ function renderLinesSetRange() {
         if (!line.posY) line.posY = gCanvas.height / 2
         drawText(line)
         setRange(line, line)
-        if (getCurrLineIdx() === idx) drawRect(line.range)
+        if (getCurrLineIdx() === idx) drawRect(line.range),drawArc(line.range)
     })
+}
+
+function drawArc({ xStart, yStart, xRate, yRate }) {
+    gCtx.beginPath()
+    gCtx.lineWidth = '2'
+    gCtx.arc(xStart+xRate, yStart+yRate, 5, 0, 2 * Math.PI)
+    gCtx.strokeStyle = 'white'
+    gCtx.stroke()
+    gCtx.fillStyle = 'lightgreen'
+    gCtx.fill()
 }
 
 //--- listeners ---
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
+    addWindowListeners()
+}
+
+function addWindowListeners() {
     window.addEventListener('resize', () => {
         resizeCanvas()
         renderCanvas()
     })
+    window.addEventListener('mouseup', onUp)
+    window.addEventListener('touchend', onUp)
 }
 
 function addMouseListeners() {
@@ -108,10 +127,6 @@ function onDown(ev) {
 function onMove(ev) {
     if (gDrag) {
         const pos = getPosFromEv(ev)
-        if (isOutOfCanvas(pos)) {
-            onUp()
-            return
-        }
         const dx = pos.posX - gStartPos.posX
         const dy = pos.posY - gStartPos.posY
         moveLine(dx, dy)
@@ -146,10 +161,6 @@ function getPosFromEv(ev) {
         posY = ev.offsetY
     }
     return { posX, posY }
-}
-
-function isOutOfCanvas({ posX, posY }) {
-    return (posX <= -1 || posY <= -1 || posX >= gCanvas.width - 1 || posY >= gCanvas.height - 1)
 }
 
 //--- controller ---
@@ -193,12 +204,6 @@ function onMoveNextLine() {
     _setControllerValuesByLine()
 }
 
-function onAlign(dir) {
-    if (_isNoLineSelected()) return
-    setTextAlign(dir)
-    renderCanvas()
-}
-
 function onAdd() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
     addLine(elLineTxtInput.value + '')
@@ -226,15 +231,15 @@ function _downloadCanvas(elLink) {
     const tempLineIdx = getCurrLineIdx()
     setCurrLineIdx(-1)
     renderCanvas()
-    const data = gCanvas.toDataURL() 
-    elLink.href = data
-    elLink.download = 'my-img.jgp'
+    const data = gCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'my-img.jpg';
     setTimeout(() => {
         setCurrLineIdx(tempLineIdx)
         renderCanvas()
     }, 1000 * 1)
 }
-  
+
 function _setLineTextInputVal() {
     let elLineTxtInput = document.querySelector('[name=line-text]')
 
@@ -245,10 +250,9 @@ function _setLineTextInputVal() {
         if (getCurrLineIdx() === -1) {
             elLineTxtInput.value = 'no line selected'
             elLineTxtInput.disabled = true
-        }else {
-             elLineTxtInput.disabled = false
-             console.log(getCurrLineIdx())
-        elLineTxtInput.value = getCurrLine().text
+        } else {
+            elLineTxtInput.disabled = false
+            elLineTxtInput.value = getCurrLine().text
         }
     }
 }

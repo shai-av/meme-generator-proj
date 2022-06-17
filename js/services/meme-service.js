@@ -3,7 +3,6 @@ var testLine = {
     text: 'Text Here1',
     font: 'Impact',
     size: 35,
-    align: 'center',
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
@@ -15,7 +14,6 @@ var testLine2 = {
     text: 'Text Here2',
     font: 'Impact',
     size: 35,
-    align: 'center',
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
@@ -27,7 +25,6 @@ var demoLine = {
     text: '',
     font: 'Impact',
     size: 40,
-    align: 'center',
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
@@ -70,10 +67,6 @@ function setStrokeColor(color) {
 
 function setFontColor(color) {
     gCurrLine.color = color
-}
-
-function setTextAlign(dir) {
-    gCurrLine.align = dir
 }
 
 function setFont(font) {
@@ -121,10 +114,12 @@ function setText(val) {
 }
 
 function setRange(line, { posX, posY, text, size }) {
+    const context = getContext()
+    let txtWidth = context.measureText(text).width
     line.range = {
-        xStart: posX - text.length * size / 2 - 3,
+        xStart: posX-txtWidth/2-5,
         yStart: posY - size * 1.2,
-        xRate: text.length * size + 3,
+        xRate: txtWidth+10,
         yRate: size * 1.5
     }
 }
