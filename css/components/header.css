@@ -1,5 +1,9 @@
 .main-header {
     background-color: var(--clr3);
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 1;
 }
 
 .main-header .main-nav a {
@@ -8,17 +12,70 @@
     line-height: 1.2;
     height: 4.125rem;
     text-decoration: none;
-    color:var(--clr1)
+    color:var(--clr1);
+    padding: 0 2em;
+  
 }
 
+.main-header .main-nav li{
+    width:100%;
+    border:1px solid black;
+}
 .main-header .main-nav a:hover {
     color:var(--clr4);
-    box-shadow: inset 0px -4px var(--clr4);
 }
 .main-nav span.spreader{
-    margin: 0 0.6rem;
+    display: none;
 }
 body.gallery-open a.nav-btn-gallery{
     color:var(--clr4);
-    box-shadow: inset 0px -4px var(--clr4);
+}
+.main-nav{
+    position:absolute;
+    transition: 1s;
+    top:4.11rem;
+    right:-10em;
+    background-color: var(--clr3);
+}
+
+body.menu-open .main-nav{
+    position:absolute;
+    right:0;
+    background-color: var(--clr3);
+}
+
+.block-screen{
+    position:fixed;
+    top:4.11rem;
+    width: 100%;
+    height: 100%;
+    transition:opacity 0.5s;
+    opacity: 0%;
+    pointer-events: none;
+}
+
+body.menu-open .block-screen{
+    position:fixed;
+    top:4.11rem;
+    width: 100%;
+    height: 100%;
+    opacity: 100%;
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.466);
+}
+
+.hamb-btn{
+background-color: inherit;
+border:none;
+font-size: xx-large;
+padding-right:1em;
+padding: 0.359em 0;
+}
+
+.hamb-btn::before{
+    content: '☰';
+}
+body.menu-open .hamb-btn::before{
+    content:'X';
+    font-size:2.258rem;
 }
