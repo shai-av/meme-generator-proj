@@ -23,7 +23,7 @@ function getContext() {
     return gCtx
 }
 
-function getCanvas(){
+function getCanvas() {
     return gCanvas
 }
 
@@ -32,10 +32,10 @@ function _resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
     let imageHeight = +gCurrImage.naturalHeight
     let imageWidth = +gCurrImage.naturalWidth
-    let imageRatio = imageHeight/imageWidth
+    let imageRatio = imageHeight / imageWidth
 
     gCanvas.width = elCanvasContainer.offsetWidth
-    gCanvas.height = elCanvasContainer.offsetWidth*imageRatio
+    gCanvas.height = elCanvasContainer.offsetWidth * imageRatio
 }
 
 function _renderCanvas() {
@@ -47,7 +47,7 @@ function _renderCanvas() {
         gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
         _renderLinesSetRange()
     }
-  
+
 }
 
 //--- Drawing ---
@@ -73,10 +73,10 @@ function _renderLinesSetRange() {
     lines.forEach((line, idx) => {
         if (!line.posX) line.posX = gCanvas.width / 2
         if (!line.posY) line.posY = gCanvas.height / 2
-        if(line.posY === 'bottom') line.posY = getCanvas().height - line.size
+        if (line.posY === 'bottom') line.posY = getCanvas().height - line.size
         _drawText(line)
         setRange(line, line)
-        
+
         if (getCurrLineIdx() === idx) _drawRect(line.range), _drawArc(line.range)
     })
 }
@@ -127,7 +127,7 @@ function _addDownloadBtnListeners() {
     elDownload.addEventListener('touchstart', _clearLineFrame)
 }
 
-function _addSaveBtnListeners(){
+function _addSaveBtnListeners() {
     const elSave = document.querySelector('.save-btn')
     elSave.addEventListener('mousedown', _clearLineFrame)
     elSave.addEventListener('touchstart', _clearLineFrame)
@@ -257,7 +257,7 @@ function onFontChange(font) {
     _renderCanvas()
 }
 
-function onAlign(dir){
+function onAlign(dir) {
     if (_isNoLineSelected()) return
     setAlign(dir)
     _renderCanvas()
@@ -269,10 +269,18 @@ function _downloadCanvas(elLink) {
     elLink.download = 'my-img.jpg'
 }
 
-function onSave(){
+function onSave() {
     const meme = getCurrMeme()
     const imgDataUrl = gCanvas.toDataURL()
-    saveMeme(meme,imgDataUrl)
+    saveMeme(meme, imgDataUrl)
+    _showHidesaveModal()
+}
+
+function _showHidesaveModal() {
+    document.body.classList.add('save-modal-open')
+    setTimeout(() => {
+        document.body.classList.remove('save-modal-open')
+    }, 1000 * 1.5)
 }
 
 function _setLineTextInputVal() {
