@@ -10,7 +10,8 @@
     min-width: 9.8125em;
     height: 9.8125em;
     border-radius: 50%;
-    background-image: url("DESIGN/images/demo-pic.svg");
+    background-image: url("DESIGN/IMAGES/demo-pic.svg");
+    background-color: tomato;
     background-position: center;
 }
 
