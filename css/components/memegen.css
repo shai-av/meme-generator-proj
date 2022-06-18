@@ -4,14 +4,15 @@
     display: none;
 }
 
-body.memegen-open .memegen{
-    display:flex;
+body.memegen-open .memegen {
+    display: flex;
 }
 
-.memegen-container >div{
+.memegen-container>div {
     width: 100%;
 }
-.memegen-container{
-    padding:0.5em 0;
-    width:100%;
+
+.memegen-container {
+    padding: 0.5em 0;
+    width: 100%;
 }

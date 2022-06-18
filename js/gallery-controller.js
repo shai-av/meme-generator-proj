@@ -1,9 +1,9 @@
 'use strict'
 function onGalleryInit() {
-    renderImages()
+    _renderImages()
 }
 
-function renderImages() {
+function _renderImages() {
     let images = getImages()
 
     let strHTML = ''
@@ -25,7 +25,7 @@ function onImgClk(img) {
 
 function showGallery(){
     document.body.className = 'gallery-open'
-    resetDefaultLines()
+    setResetDefaultLines()
 }
 
 function onSearchIcon(){
@@ -35,5 +35,5 @@ function onSearchIcon(){
 
 function onFilter(val){
     setFilterBy(val.toLowerCase())
-    renderImages()
+    _renderImages()
 }

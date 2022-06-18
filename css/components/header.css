@@ -1,62 +1,67 @@
+/* -- header -- */
 .main-header {
     background-color: var(--clr3);
     position: fixed;
-    top:0;
+    top: 0;
     width: 100%;
     z-index: 1;
 }
 
 .main-header .main-nav a {
-    font-family: Montserrat-Regular,sans-serif;
+    font-family: Montserrat-Regular, sans-serif;
     font-size: 1.1875rem;
     line-height: 1.2;
     height: 4.125rem;
     text-decoration: none;
-    color:var(--clr1);
+    color: var(--clr1);
     padding: 0 2em;
-  
+
 }
 
-.main-header .main-nav li{
-    width:100%;
-    border:1px solid var(--clr6);
+.main-header .main-nav li {
+    width: 100%;
+    border: 1px solid var(--clr6);
 }
+
 .main-header .main-nav a:hover {
-    color:var(--clr4);
+    color: var(--clr4);
 }
-.main-nav span.spreader{
+
+.main-nav span.spreader {
     display: none;
 }
-body.gallery-open a.nav-btn-gallery{
-    color:var(--clr4);
+
+body.gallery-open a.nav-btn-gallery {
+    color: var(--clr4);
 }
-.main-nav{
-    position:absolute;
+
+.main-nav {
+    position: absolute;
     transition: 1s;
-    top:4.11rem;
-    right:-10em;
+    top: 4.11rem;
+    right: -10em;
     background-color: var(--clr3);
 }
 
-body.menu-open .main-nav{
-    position:absolute;
-    right:0;
+body.menu-open .main-nav {
+    position: absolute;
+    right: 0;
     background-color: var(--clr3);
 }
 
-.block-screen{
-    position:fixed;
-    top:4.11rem;
+.block-screen {
+    position: fixed;
+    top: 4.11rem;
     width: 100%;
     height: 100%;
-    transition:opacity 0.5s;
+    transition: opacity 0.5s;
     opacity: 0%;
     pointer-events: none;
 }
 
-body.menu-open .block-screen{
-    position:fixed;
-    top:4.11rem;
+body.menu-open .block-screen {
+    position: fixed;
+    top: 4.11rem;
     width: 100%;
     height: 100%;
     opacity: 100%;
@@ -64,17 +69,18 @@ body.menu-open .block-screen{
     background-color: rgba(0, 0, 0, 0.466);
 }
 
-.hamb-btn{
-background-color: inherit;
-border:none;
-font-size: xx-large;
-padding-right:1em;
-padding: 0.359em 0;
+.hamb-btn {
+    background-color: inherit;
+    border: none;
+    font-size: xx-large;
+    padding-right: 1em;
+    padding: 0.359em 0;
 }
 
-.hamb-btn::before{
+.hamb-btn::before {
     content: '☰';
 }
-body.menu-open .hamb-btn::before{
-    content:'✖';
+
+body.menu-open .hamb-btn::before {
+    content: '✖';
 }

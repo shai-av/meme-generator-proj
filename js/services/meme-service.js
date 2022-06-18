@@ -1,4 +1,8 @@
 'use strict'
+
+var gMeme
+var gCurrLine
+
 var gDefLine1 = {
     text: 'Text Here1',
     font: 'Impact',
@@ -32,10 +36,7 @@ var gDemoLine = {
     range: {}
 }
 
-var gMeme
-var gCurrLine
-
-function createMeme() {
+function _createMeme() {
     let meme = {
         image: getSelectedImage(),
         currLine: 0,
@@ -45,7 +46,7 @@ function createMeme() {
 }
 
 function setMeme() {
-    gMeme = createMeme()
+    gMeme = _createMeme()
     setGCurrLine()
     return gMeme
 }
@@ -57,10 +58,12 @@ function setGCurrLine() {
 function increaseTextSize(x = 5) {
     gCurrLine.size += x
 }
+
 function decreaseTextSize(x = 5) {
     let size = gCurrLine.size
     if (size > 5) gCurrLine.size -= x
 }
+
 function setStrokeColor(color) {
     gCurrLine.strokeColor = color
 }
@@ -96,14 +99,14 @@ function setAlign(dir) {
     switch (dir) {
         case 'left':
             gCurrLine.posX = gCurrLine.range.xRate / 2
-            break;
+            break
         case 'right':
             gCurrLine.posX = getCanvas().width - gCurrLine.range.xRate / 2
-            console.log('entered');
-            break;
+            break
         default: gCurrLine.posX = getCanvas().width / 2
     }
 }
+
 function addLine(str = '') {
     let newLine = JSON.parse(JSON.stringify(gDemoLine))
     newLine.text = str
@@ -142,6 +145,7 @@ function setCurrLineIdx(idx) {
     if (idx === -1) return
     setGCurrLine()
 }
+
 function moveLine(dx, dy) {
     gCurrLine.posX += dx
     gCurrLine.posY += dy
@@ -173,4 +177,8 @@ function resetDefaultLines() {
         posY: 'bottom',
         range: {}
     }
+}
+
+function setResetDefaultLines(){
+    resetDefaultLines()
 }

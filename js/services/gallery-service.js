@@ -33,7 +33,7 @@ function getImages() {
     let images = gImages.slice()
     if (gFilterBy.length) {
         for (var i = 0; i < gFilterBy.length; i++) {
-            images = filterImages(gFilterBy[i], images)
+            images = _filterImages(gFilterBy[i], images)
         }
     }
     return images
@@ -51,7 +51,7 @@ function setFilterBy(val) {
     gFilterBy = val.split(' ')
 }
 
-function filterImages(str, images) {
+function _filterImages(str, images) {
     let tempImages = images.filter(image => {
         let tag = image.tag.filter(tag => tag.includes(str))
         return tag.length > 0

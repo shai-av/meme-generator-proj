@@ -1,3 +1,4 @@
+/* -- controller -- */
 .controller-item {
     height: 50px;
     width: 50px;
@@ -5,19 +6,21 @@
     border-radius: 1em;
     padding: 5.5px 5px 5px 5.5px;
 }
-.controller-item:active{
+
+.controller-item:active {
     background-color: var(--clr5);
 }
+
 .controller-item img {
     object-fit: contain;
 }
 
 .drawing-controller {
-    padding-top:0.4em;
+    padding-top: 0.4em;
     display: grid;
 
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5,1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-template-areas:
         "txt-input txt-input txt-input txt-input txt-input txt-input txt-input"
         "add-line del font-select font-select font-select stroke-clr font-clr"
@@ -32,7 +35,7 @@
 .txt-input {
     grid-area: txt-input;
     background-color: var(--clr3);
-    font-size:1em;
+    font-size: 1em;
     color: var(--clr1);
     border-radius: 1em;
     padding-left: 0.5em;
@@ -64,7 +67,7 @@
 
 .font-select {
     grid-area: font-select;
-    font-size:1em;
+    font-size: 1em;
     background-color: var(--clr3);
     color: var(--clr1);
     border-radius: 1em;
@@ -77,31 +80,35 @@
 .font-clr {
     grid-area: font-clr;
 }
-.align-left{
+
+.align-left {
     grid-area: align-left;
 }
-.align-center{
+
+.align-center {
     grid-area: align-center;
 }
-.align-right{
+
+.align-right {
     grid-area: align-right;
 }
 
-.emojs{
+.emojs {
     grid-area: emojs;
     font-size: 3.3em;
     background-color: var(--clr1);
     border-radius: 0.2em;
 }
-.emojs span{
+
+.emojs span {
     cursor: pointer;
 }
 
-.drawing-controller button{
+.drawing-controller button {
     width: 100%;
     height: 100%;
     font-size: 1.25em;
-    font-family: Montserrat-Medium,sans-serif;
+    font-family: Montserrat-Medium, sans-serif;
     color: var(--clr1);
     background-color: var(--clr3);
 }
@@ -115,6 +122,6 @@
     text-decoration: none;
 }
 
-.save-btn{
+.save-btn {
     grid-area: save-btn;
 }

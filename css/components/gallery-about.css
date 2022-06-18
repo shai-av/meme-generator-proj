@@ -1,3 +1,4 @@
+/* -- gallery about -- */
 .gallery-about {
     padding-top: 2.125em;
     margin-bottom: 5.7em;
@@ -25,15 +26,15 @@
 
 .gallery-about .txt p {
     font-size: 0.9375rem;
-    font-family: Montserrat-Regular;
+    font-family: Montserrat-Regular,sans-serif;
     margin: 0;
     margin-bottom: 0.7em;
 }
 
 .gallery-about .txt h2 {
     font-size: 1.375em;
-    font-family: Montserrat-Bold;
-    color:var(--clr3);
+    font-family: Montserrat-Bold,serif;
+    color: var(--clr3);
     margin: 0;
     margin-bottom: 0.5em
 }

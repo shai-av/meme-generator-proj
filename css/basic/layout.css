@@ -1,10 +1,10 @@
 .main-layout {
-    max-width:calc(100% - 1.25rem);
+    max-width: calc(100% - 1.25rem);
     margin: 0 auto;
     padding-left: 1.6rem;
     padding-right: 1.6rem;
-    box-sizing: content-box;
 }
-.main-content{
-    margin-top:4.11rem;
+
+.main-content {
+    margin-top: 4.11rem;
 }

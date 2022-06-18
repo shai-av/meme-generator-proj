@@ -10,8 +10,8 @@ function onMemeGenInit() {
     gCtx = gCanvas.getContext('2d')
     setMeme()
     _setLineTextInputVal()
-    addListeners()
-    renderCanvas()
+    _addListeners()
+    _renderCanvas()
     _resizeCanvas()
 }
 
@@ -26,6 +26,7 @@ function getContext() {
 function getCanvas(){
     return gCanvas
 }
+
 //--- Canvas ---
 function _resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
@@ -37,20 +38,20 @@ function _resizeCanvas() {
     gCanvas.height = elCanvasContainer.offsetWidth*imageRatio
 }
 
-function renderCanvas() {
+function _renderCanvas() {
     let image = new Image()
     image.src = getCurrMeme().image.dataset.src
     gCurrImage = image
 
     image.onload = () => {
         gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
-        renderLinesSetRange()
+        _renderLinesSetRange()
     }
   
 }
 
 //--- Drawing ---
-function drawText({ strokeColor, color, size, font, text, posX, posY }) {
+function _drawText({ strokeColor, color, size, font, text, posX, posY }) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
@@ -60,27 +61,27 @@ function drawText({ strokeColor, color, size, font, text, posX, posY }) {
     gCtx.strokeText(text, posX, posY)
 }
 
-function drawRect({ xStart, yStart, xRate, yRate }) {
+function _drawRect({ xStart, yStart, xRate, yRate }) {
     gCtx.beginPath()
     gCtx.strokeStyle = 'black'
     gCtx.rect(xStart, yStart, xRate, yRate)
     gCtx.stroke()
 }
 
-function renderLinesSetRange() {
+function _renderLinesSetRange() {
     const lines = getCurrMeme().lines
     lines.forEach((line, idx) => {
         if (!line.posX) line.posX = gCanvas.width / 2
         if (!line.posY) line.posY = gCanvas.height / 2
         if(line.posY === 'bottom') line.posY = getCanvas().height - line.size
-        drawText(line)
+        _drawText(line)
         setRange(line, line)
         
-        if (getCurrLineIdx() === idx) drawRect(line.range), drawArc(line.range)
+        if (getCurrLineIdx() === idx) _drawRect(line.range), _drawArc(line.range)
     })
 }
 
-function drawArc({ xStart, yStart, xRate, yRate }) {
+function _drawArc({ xStart, yStart, xRate, yRate }) {
     gCtx.beginPath()
     gCtx.lineWidth = '2'
     gCtx.arc(xStart + xRate, yStart + yRate, 5, 0, 2 * Math.PI)
@@ -91,75 +92,77 @@ function drawArc({ xStart, yStart, xRate, yRate }) {
 }
 
 //--- listeners ---
-function addListeners() {
-    addMouseListeners()
-    addTouchListeners()
-    addWindowListeners()
-    addDownloadBtnListenesrs()
+function _addListeners() {
+    _addMouseListeners()
+    _addTouchListeners()
+    _addWindowListeners()
+    _addDownloadBtnListenesrs()
 }
 
-function addWindowListeners() {
+function _addWindowListeners() {
     window.addEventListener('resize', () => {
         _resizeCanvas()
-        renderCanvas()
+        _renderCanvas()
     })
-    window.addEventListener('mouseup', onUp)
-    window.addEventListener('touchend', onUp)
+    window.addEventListener('mouseup', _onUp)
+    window.addEventListener('touchend', _onUp)
 }
 
-function addMouseListeners() {
-    gCanvas.addEventListener('mousemove', onMove)
-    gCanvas.addEventListener('mousedown', onDown)
-    gCanvas.addEventListener('mouseup', onUp)
+function _addMouseListeners() {
+    gCanvas.addEventListener('mousemove', _onMove)
+    gCanvas.addEventListener('mousedown', _onDown)
+    gCanvas.addEventListener('mouseup', _onUp)
 }
 
-function addTouchListeners() {
-    gCanvas.addEventListener('touchmove', onMove)
-    gCanvas.addEventListener('touchstart', onDown)
-    gCanvas.addEventListener('touchend', onUp)
+function _addTouchListeners() {
+    gCanvas.addEventListener('touchmove', _onMove)
+    gCanvas.addEventListener('touchstart', _onDown)
+    gCanvas.addEventListener('touchend', _onUp)
 }
 
-function addDownloadBtnListenesrs() {
+function _addDownloadBtnListenesrs() {
     const elDownload = document.querySelector('.download-link')
-    elDownload.addEventListener('mousedown', clearLineFrame)
-    elDownload.addEventListener('touchstart', clearLineFrame)
+    elDownload.addEventListener('mousedown', _clearLineFrame)
+    elDownload.addEventListener('touchstart', _clearLineFrame)
 }
-function clearLineFrame() {
+
+function _clearLineFrame() {
     setCurrLineIdx(-1)
-    renderCanvas()
+    _renderCanvas()
     setGCurrLine()
     _setLineTextInputVal()
 }
+
 //--- events handlers ---
-function onDown(ev) {
-    const pos = getPosFromEv(ev)
-    let lineIdx = getClickedLineIdx(pos)
+function _onDown(ev) {
+    const pos = _getPosFromEv(ev)
+    let lineIdx = _getClickedLineIdx(pos)
     if (lineIdx !== -1) {
         setCurrLineIdx(lineIdx)
         _setControllerValuesByLine()
         _setLineTextInputVal()
-        renderCanvas()
+        _renderCanvas()
         gDrag = true
         gStartPos = pos
-    } else setCurrLineIdx(-1), renderCanvas(), _setLineTextInputVal()
+    } else setCurrLineIdx(-1), _renderCanvas(), _setLineTextInputVal()
 }
 
-function onMove(ev) {
+function _onMove(ev) {
     if (gDrag) {
-        const pos = getPosFromEv(ev)
+        const pos = _getPosFromEv(ev)
         const dx = pos.posX - gStartPos.posX
         const dy = pos.posY - gStartPos.posY
         moveLine(dx, dy)
         gStartPos = pos
-        renderCanvas()
+        _renderCanvas()
     }
 }
 
-function onUp() {
+function _onUp() {
     if (gDrag) gDrag = false
 }
 
-function getClickedLineIdx({ posX, posY }) {
+function _getClickedLineIdx({ posX, posY }) {
     const lines = getCurrMeme().lines
     const lineIdx = lines.findIndex(({ range }) => {
         return posX >= range.xStart && posX <= range.xStart + range.xRate &&
@@ -168,7 +171,7 @@ function getClickedLineIdx({ posX, posY }) {
     return lineIdx
 }
 
-function getPosFromEv(ev) {
+function _getPosFromEv(ev) {
     let posX
     let posY
     if (ev.type.includes('touch')) {
@@ -187,32 +190,32 @@ function getPosFromEv(ev) {
 function onIncreaseTextSize() {
     if (_isNoLineSelected()) return
     increaseTextSize()
-    renderCanvas()
+    _renderCanvas()
 }
 
 function onDecreaseTextSize() {
     if (_isNoLineSelected()) return
     decreaseTextSize()
-    renderCanvas()
+    _renderCanvas()
 }
 
 function onStrokeClrChnage(color) {
     if (_isNoLineSelected()) return
     setStrokeColor(color)
-    renderCanvas()
+    _renderCanvas()
 }
 
 function onFontClrChange(color) {
     if (_isNoLineSelected()) return
     setFontColor(color)
-    renderCanvas()
+    _renderCanvas()
 }
 
 function onMovePrevLine() {
     if (!_isLines()) return
     setPrevLine()
     _setLineTextInputVal()
-    renderCanvas()
+    _renderCanvas()
     _setControllerValuesByLine()
 }
 
@@ -220,7 +223,7 @@ function onMoveNextLine() {
     if (!_isLines()) return
     setNextLine()
     _setLineTextInputVal()
-    renderCanvas()
+    _renderCanvas()
     _setControllerValuesByLine()
 }
 
@@ -228,16 +231,16 @@ function onAdd(str = '') {
     let elLineTxtInput = document.querySelector('[name=line-text]')
     addLine(str)
     _setLineTextInputVal()
-    renderLinesSetRange()
+    _renderLinesSetRange()
     elLineTxtInput.focus()
     _setControllerValuesByLine()
-    renderCanvas()
+    _renderCanvas()
 }
 
 function onDelete() {
     if (_isNoLineSelected()) return
     deleteLine()
-    renderCanvas()
+    _renderCanvas()
     _setLineTextInputVal()
     _setControllerValuesByLine()
 }
@@ -245,14 +248,15 @@ function onDelete() {
 function onFontChange(font) {
     if (_isNoLineSelected()) return
     setFont(font)
-    renderCanvas()
+    _renderCanvas()
 }
 
 function onAlign(dir){
     if (_isNoLineSelected()) return
     setAlign(dir)
-    renderCanvas()
+    _renderCanvas()
 }
+
 function _downloadCanvas(elLink) {
     const data = gCanvas.toDataURL()
     elLink.href = data
@@ -295,7 +299,7 @@ function _isNoLineSelected() {
 function onTextChange(val) {
     if (!_isLines()) return
     setText(val)
-    renderCanvas()
+    _renderCanvas()
 }
 
 function _isLines() {

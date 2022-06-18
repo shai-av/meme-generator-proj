@@ -1,14 +1,17 @@
-.main-footer{
+/* -- footer --  */
+.main-footer {
     background-color: var(--clr3);
 }
-.main-footer div{
-    padding-top:4.8125em;
-    margin-bottom:0.5em;
+
+.main-footer div {
+    padding-top: 4.8125em;
+    margin-bottom: 0.5em;
 }
-.main-footer small{
+
+.main-footer small {
     font-size: 1.1875rem;
     line-height: 1.2;
-    margin-bottom:3.67em;
-    font-family: Montserrat-Thin,sans-serif;
-    color:var(--clr1)
+    margin-bottom: 3.67em;
+    font-family: Montserrat-Thin, sans-serif;
+    color: var(--clr1)
 }
