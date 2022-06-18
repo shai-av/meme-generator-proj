@@ -4,40 +4,51 @@
     .main-layout {
         max-width: calc(100% - 4.25rem);
     }
-    .main-content{
-        margin-top:0;
+
+    .main-content {
+        margin-top: 0;
     }
+
     /* //-- header -- */
-    .main-header{
-        position:static;
+    .main-header {
+        position: static;
     }
-    .hamb-btn{
-        display:none;
+
+    .hamb-btn {
+        display: none;
     }
+
     /* -- nav bar --  */
-    .main-nav{
-        position:static;
+    .main-nav {
+        position: static;
     }
-    .main-nav ul{
+
+    .main-nav ul {
         flex-direction: row;
     }
-    .main-header .main-nav a{
-        padding:0;
+
+    .main-header .main-nav a {
+        padding: 0;
     }
-    .main-header .main-nav li{
-        width:unset;
-        border:none;
+
+    .main-header .main-nav li {
+        width: unset;
+        border: none;
     }
-    .main-nav span.spreader{
+
+    .main-nav span.spreader {
         margin: 0 0.6rem;
         display: inline;
     }
+
     .main-header .main-nav a:hover {
         box-shadow: inset 0px -4px var(--clr4);
     }
-    body.gallery-open a.nav-btn-gallery{
+
+    body.gallery-open a.nav-btn-gallery {
         box-shadow: inset 0px -4px var(--clr4);
     }
+
     /* // -- gallery -- */
     .grid-container {
         grid-template-columns: repeat(3, 31%);
@@ -73,26 +84,29 @@
         min-width: 20.125em;
         height: 20.125em;
     }
+
     /* -- search-bar --  */
     .search-image-container {
         padding: 2.4em;
     }
-    
+
     /* // -- memegen -- */
-    .memegen-container{
+    .memegen-container {
         flex-direction: row;
-        padding:1.625em 3.125em;
+        padding: 1.625em 3.125em;
     }
-    .memegen-container >div{
+
+    .memegen-container>div {
         width: 50%;
     }
+
     /* -- controller -- */
     .drawing-controller {
-        padding-top:0;
+        padding-top: 0;
         display: grid;
-    
+
         grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(7,1fr);
+        grid-template-rows: repeat(7, 1fr);
         grid-template-areas:
             "txt-input txt-input txt-input txt-input txt-input"
             "arrow-up arrow-down . add-line del"

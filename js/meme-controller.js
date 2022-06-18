@@ -12,7 +12,7 @@ function onMemeGenInit() {
     _setLineTextInputVal()
     addListeners()
     renderCanvas()
-    resizeCanvas()
+    _resizeCanvas()
 }
 
 function showMemeGen() {
@@ -27,7 +27,7 @@ function getCanvas(){
     return gCanvas
 }
 //--- Canvas ---
-function resizeCanvas() {
+function _resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
     let imageHeight = +gCurrImage.naturalHeight
     let imageWidth = +gCurrImage.naturalWidth
@@ -100,7 +100,7 @@ function addListeners() {
 
 function addWindowListeners() {
     window.addEventListener('resize', () => {
-        resizeCanvas()
+        _resizeCanvas()
         renderCanvas()
     })
     window.addEventListener('mouseup', onUp)

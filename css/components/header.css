@@ -19,7 +19,7 @@
 
 .main-header .main-nav li{
     width:100%;
-    border:1px solid black;
+    border:1px solid var(--clr6);
 }
 .main-header .main-nav a:hover {
     color:var(--clr4);
@@ -76,6 +76,5 @@ padding: 0.359em 0;
     content: '☰';
 }
 body.menu-open .hamb-btn::before{
-    content:'X';
-    font-size:2.258rem;
+    content:'✖';
 }
