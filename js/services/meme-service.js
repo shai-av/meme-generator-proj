@@ -17,7 +17,7 @@ var gDefLine2 = {
     color: '#ffffff',
     strokeColor: '#000000',
     posX: undefined,
-    posY: 465,
+    posY: 'bottom',
     range: {}
 }
 
@@ -170,7 +170,7 @@ function resetDefaultLines() {
         color: '#ffffff',
         strokeColor: '#000000',
         posX: undefined,
-        posY: 465,
+        posY: 'bottom',
         range: {}
     }
 }

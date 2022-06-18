@@ -72,6 +72,7 @@ function renderLinesSetRange() {
     lines.forEach((line, idx) => {
         if (!line.posX) line.posX = gCanvas.width / 2
         if (!line.posY) line.posY = gCanvas.height / 2
+        if(line.posY === 'bottom') line.posY = getCanvas().height - line.size
         drawText(line)
         setRange(line, line)
         
@@ -181,10 +182,6 @@ function getPosFromEv(ev) {
     }
     return { posX, posY }
 }
-// function isOutOfCanvas({target},{posX,posY}){
-//      return posX<=target.offsetLeft || posX>= target.offsetLeft+target.offsetWidth
-//             posY<=
-// }
 
 //--- controller ---
 function onIncreaseTextSize() {
@@ -257,9 +254,9 @@ function onAlign(dir){
     renderCanvas()
 }
 function _downloadCanvas(elLink) {
-    const data = gCanvas.toDataURL();
-    elLink.href = data;
-    elLink.download = 'my-img.jpg';
+    const data = gCanvas.toDataURL()
+    elLink.href = data
+    elLink.download = 'my-img.jpg'
 }
 
 function _setLineTextInputVal() {

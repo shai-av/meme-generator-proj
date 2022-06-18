@@ -2,22 +2,22 @@
 
 @font-face {
     font-family: Montserrat-Thin;
-    src: url(/fonts/Montserrat/Montserrat-Thin.ttf);
+    src: url(../../fonts/Montserrat/Montserrat-Thin.ttf);
 }
 
 @font-face {
     font-family: Montserrat-Regular;
-    src: url(/fonts/Montserrat/Montserrat-Regular.ttf);
+    src: url(../../fonts/Montserrat/Montserrat-Regular.ttf);
 }
 
 @font-face {
     font-family: Montserrat-Medium;
-    src: url(/fonts/Montserrat/Montserrat-Medium.ttf);
+    src: url(../../fonts/Montserrat/Montserrat-Medium.ttf);
 }
 
 @font-face {
     font-family: Montserrat-Bold;
-    src: url(/fonts/Montserrat/Montserrat-Bold.ttf);
+    src: url(../../fonts/Montserrat/Montserrat-Bold.ttf);
 }
 
 
