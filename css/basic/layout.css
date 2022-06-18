@@ -1,6 +1,5 @@
 .main-layout {
-    /* max-width: 1150px; */
-    max-width:calc(100% - 3.125rem);
+    max-width:calc(100% - 1.25rem);
     margin: 0 auto;
     padding-left: 1.6rem;
     padding-right: 1.6rem;

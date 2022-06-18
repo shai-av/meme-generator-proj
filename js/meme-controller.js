@@ -3,6 +3,7 @@ var gCanvas
 var gCtx
 var gDrag = false
 var gStartPos
+var gCurrImage = null
 
 function onMemeGenInit() {
     gCanvas = document.getElementById('my-canvas')
@@ -10,16 +11,12 @@ function onMemeGenInit() {
     setMeme()
     _setLineTextInputVal()
     addListeners()
-    resizeCanvas()
     renderCanvas()
-}
-
-function hideMemeGen() {
-    document.querySelector('.memegen').style.display = 'none'
+    resizeCanvas()
 }
 
 function showMemeGen() {
-    document.querySelector('.memegen').style.display = 'flex'
+    document.body.className = 'memegen-open'
 }
 
 function getContext() {
@@ -32,17 +29,19 @@ function getCanvas(){
 //--- Canvas ---
 function resizeCanvas() {
     let elCanvasContainer = document.querySelector('.canvas-container')
-    // gCanvas.width = elCanvasContainer.offsetWidth
-    gCanvas.height = elCanvasContainer.offsetHeight
-    gCanvas.width = gCanvas.height
-    // gCanvas.width = 500
-    // gCanvas.height = 500
+    let imageHeight = +gCurrImage.naturalHeight
+    let imageWidth = +gCurrImage.naturalWidth
+    let imageRatio = imageHeight/imageWidth
+
+    gCanvas.width = elCanvasContainer.offsetWidth
+    gCanvas.height = elCanvasContainer.offsetWidth*imageRatio
 }
 
 function renderCanvas() {
     let image = new Image()
     image.src = getCurrMeme().image.dataset.src
-    console.log(image);
+    gCurrImage = image
+
     image.onload = () => {
         gCtx.drawImage(image, 0, 0, gCanvas.width, gCanvas.height)
         renderLinesSetRange()

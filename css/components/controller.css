@@ -13,26 +13,26 @@
 }
 
 .drawing-controller {
+    padding-top:0.4em;
     display: grid;
 
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(7,1fr);
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5,1fr);
     grid-template-areas:
-        "txt-input txt-input txt-input txt-input txt-input"
-        "arrow-up arrow-down . add-line del"
-        "txt-plus txt-minus align-left align-center align-right"
-        "font-select font-select font-select stroke-clr font-clr"
-        "emojs emojs emojs emojs emojs"
-        "emojs emojs emojs emojs emojs"
-        "save-btn save-btn . dw-btn dw-btn"
+        "txt-input txt-input txt-input txt-input txt-input txt-input txt-input"
+        "add-line del font-select font-select font-select stroke-clr font-clr"
+        "arrow-up arrow-down emojs emojs emojs emojs emojs"
+        "txt-plus txt-minus emojs emojs emojs emojs emojs"
+        "align-left align-center align-right save-btn save-btn dw-btn dw-btn"
     ;
     gap: 1em;
+    font-size: 1rem;
 }
 
 .txt-input {
     grid-area: txt-input;
-    font-size: 1.25em;
     background-color: var(--clr3);
+    font-size:1em;
     color: var(--clr1);
     border-radius: 1em;
     padding-left: 0.5em;
@@ -64,7 +64,7 @@
 
 .font-select {
     grid-area: font-select;
-    font-size: 1.25em;
+    font-size:1em;
     background-color: var(--clr3);
     color: var(--clr1);
     border-radius: 1em;
@@ -101,6 +101,7 @@
     width: 100%;
     height: 100%;
     font-size: 1.25em;
+    font-family: Montserrat-Medium,sans-serif;
     color: var(--clr1);
     background-color: var(--clr3);
 }

@@ -1,5 +1,4 @@
 
 function onGalleryClk(){
-    hideMemeGen()
     showGallery()
 }

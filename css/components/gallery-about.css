@@ -1,43 +1,44 @@
-.gallery-about{
-    padding-top:2.44em;
-    margin-bottom:5.18em;
+.gallery-about {
+    padding-top: 2.125em;
+    margin-bottom: 5.7em;
     background-color: var(--clr1);
-    color:var(--clr6);
+    color: var(--clr6);
 }
 
-.gallery-about .pic{
-    width:20%;
-    min-width: 20.125em;
-    height: 20.125em;
+.gallery-about .pic {
+    width: 20%;
+    min-width: 9.8125em;
+    height: 9.8125em;
     border-radius: 50%;
-    background-image: url(/DESIGN/demo-pic.svg);
+    background-image: url("/DESIGN/images/demo-pic.svg");
     background-position: center;
 }
 
-
-
-.gallery-about .txt{
-    flex-basis:40%;
+.gallery-about .txt {
+    flex-basis: 50%;
     line-height: 1.2;
-    padding-left:2.47rem;
-    padding-top:5em;
+    padding-top: 2.92em;
+    text-align: center;
+    max-width: 78%;
 }
-.gallery-about .txt p{
-    font-size: 1.25em;
+
+.gallery-about .txt p {
+    font-size: 0.9375rem;
     font-family: Montserrat-Regular;
-    margin:0;
-    margin-bottom: 1.5em;
+    margin: 0;
+    margin-bottom: 0.7em;
 }
 
-.gallery-about .txt h2{
-    font-size:1.5625em;
+.gallery-about .txt h2 {
+    font-size: 1.375em;
     font-family: Montserrat-Bold;
-    margin:0;
-    margin-bottom:0.25em
+    color:var(--clr3);
+    margin: 0;
+    margin-bottom: 0.5em
 }
 
-.gallery-about img{
-    width:132px;
+.gallery-about img {
+    width: 132px;
     height: fit-content;
-    margin-bottom:1.25em;
+    margin-bottom: 1.25em;
 }

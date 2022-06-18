@@ -19,18 +19,12 @@ function renderImages() {
 
 function onImgClk(img) {
     setSelectedImage(img)
-    hideGallery()
     showMemeGen()
     onMemeGenInit()
 }
 
-function hideGallery(){
-    document.querySelector('.gallery-container').style.display = 'none'
-    document.body.classList.remove('gallery-open')
-}
 function showGallery(){
-    document.querySelector('.gallery-container').style.display = 'block'
-    document.body.classList.add('gallery-open')
+    document.body.className = 'gallery-open'
     resetDefaultLines()
 }
 

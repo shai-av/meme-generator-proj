@@ -92,23 +92,20 @@ function getCurrLine() {
     return gCurrLine
 }
 
-function setAlign(dir){
-    switch (dir){
+function setAlign(dir) {
+    switch (dir) {
         case 'left':
-            gCurrLine.posX = gCurrLine.range.xRate/2
+            gCurrLine.posX = gCurrLine.range.xRate / 2
             break;
         case 'right':
-            gCurrLine.posX = getCanvas().width - gCurrLine.range.xRate/2
+            gCurrLine.posX = getCanvas().width - gCurrLine.range.xRate / 2
             console.log('entered');
             break;
-        default:gCurrLine.posX = getCanvas().width/2
+        default: gCurrLine.posX = getCanvas().width / 2
     }
 }
-function addLine(str ='') {
-    let newLine
-    if (gMeme.lines.length === 0) {
-        newLine = JSON.parse(JSON.stringify(gDemoLine))
-    } else newLine = JSON.parse(JSON.stringify(gCurrLine))
+function addLine(str = '') {
+    let newLine = JSON.parse(JSON.stringify(gDemoLine))
     newLine.text = str
     newLine.posY = undefined
     gMeme.lines.push(newLine)
@@ -129,9 +126,9 @@ function setRange(line, { posX, posY, text, size }) {
     const context = getContext()
     let txtWidth = context.measureText(text).width
     line.range = {
-        xStart: posX-txtWidth/2-5,
+        xStart: posX - txtWidth / 2 - 5,
         yStart: posY - size * 1.2,
-        xRate: txtWidth+10,
+        xRate: txtWidth + 10,
         yRate: size * 1.5
     }
 }
@@ -145,16 +142,16 @@ function setCurrLineIdx(idx) {
     if (idx === -1) return
     setGCurrLine()
 }
-function moveLine(dx,dy){
+function moveLine(dx, dy) {
     gCurrLine.posX += dx
     gCurrLine.posY += dy
 }
 
-function getCurrMeme(){
+function getCurrMeme() {
     return gMeme
 }
 
-function resetDefaultLines(){
+function resetDefaultLines() {
     gDefLine1 = {
         text: 'Text Here1',
         font: 'Impact',
@@ -165,7 +162,7 @@ function resetDefaultLines(){
         posY: 50,
         range: {}
     }
-    
+
     gDefLine2 = {
         text: 'Text Here2',
         font: 'Impact',

@@ -19,15 +19,22 @@ var gImages = [
     { src: '15.jpg', tag: ["zero", "shawn", "gameofthrones", "funny"] },
     { src: '16.jpg', tag: ["startrack", "laugh", "funny"] },
     { src: '17.jpg', tag: ["putin", "russia", "president", "finger"] },
-    { src: '18.jpg', tag: ["toy", "disney", "funny"] }
+    { src: '18.jpg', tag: ["toy", "disney", "funny"] },
+    { src: '19.jpg', tag: ["funny", "evil", "dr"] },
+    { src: '20.jpg', tag: ["funny", "dog"] },
+    { src: '21.jpg', tag: ["funny", "dance", "celebrate", "kid", "child"] },
+    { src: '22.jpg', tag: ["trump", "president", "point", "finger", "angry"] },
+    { src: '23.jpg', tag: ["shock", "funny", "blame"] },
+    { src: '24.jpg', tag: ["ophra", "welcome", "laugh", "show"] },
+    { src: '25.jpg', tag: ["music", "nostalgi", "movie"] },
 ]
 
 function getImages() {
     let images = gImages.slice()
     if (gFilterBy.length) {
-     for(var i = 0 ; i<gFilterBy.length ; i++){
-        images = filterImages(gFilterBy[i],images)
-     }
+        for (var i = 0; i < gFilterBy.length; i++) {
+            images = filterImages(gFilterBy[i], images)
+        }
     }
     return images
 }
@@ -44,7 +51,7 @@ function setFilterBy(val) {
     gFilterBy = val.split(' ')
 }
 
-function filterImages(str,images) {
+function filterImages(str, images) {
     let tempImages = images.filter(image => {
         let tag = image.tag.filter(tag => tag.includes(str))
         return tag.length > 0

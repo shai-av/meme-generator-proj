@@ -1,14 +1,17 @@
 /* --- MemeGen --- */
 .memegen {
     background-color: var(--clr2);
-    height: 80vh;
+    display: none;
 }
 
-.memegen-container div{
-    flex-basis: 50%;
-    /* border:1px solid black; */
+body.memegen-open .memegen{
+    display:flex;
+}
+
+.memegen-container >div{
+    width: 100%;
 }
 .memegen-container{
-    padding:1.625em 3.125em;
+    padding:0.5em 0;
     width:100%;
 }

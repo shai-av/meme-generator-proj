@@ -1,0 +1,76 @@
+@media (min-width:760px) {
+
+    /* //-- main-layout -- */
+    .main-layout {
+        max-width: calc(100% - 4.25rem);
+    }
+
+    /* // -- gallery -- */
+    .grid-container {
+        grid-template-columns: repeat(3, 31%);
+    }
+
+    /* -- gallery-about -- */
+    .gallery-about {
+        flex-direction: row;
+        padding-top: 5.03em;
+        margin-bottom: 10.4375em;
+    }
+
+    .gallery-about .txt {
+        text-align: start;
+        padding-top: 5em;
+        padding-left: 2.47rem;
+        max-width: 100%;
+    }
+
+    .gallery-about .txt p {
+        font-size: 1.25rem;
+        margin-bottom: 1.5em;
+    }
+
+    .gallery-about .txt h2 {
+        font-size: 1.5625em;
+        color: var(--clr6);
+        margin-bottom: 0.25em;
+    }
+
+    .gallery-about .pic {
+        width: 20%;
+        min-width: 20.125em;
+        height: 20.125em;
+    }
+    /* -- search-bar --  */
+    .search-image-container {
+        padding: 2.4em;
+    }
+    
+    /* // -- memegen -- */
+    .memegen-container{
+        flex-direction: row;
+        padding:1.625em 3.125em;
+    }
+    .memegen-container >div{
+        width: 50%;
+    }
+    /* -- controller -- */
+    .drawing-controller {
+        padding-top:0;
+        display: grid;
+    
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(7,1fr);
+        grid-template-areas:
+            "txt-input txt-input txt-input txt-input txt-input"
+            "arrow-up arrow-down . add-line del"
+            "txt-plus txt-minus align-left align-center align-right"
+            "font-select font-select font-select stroke-clr font-clr"
+            "emojs emojs emojs emojs emojs"
+            "emojs emojs emojs emojs emojs"
+            "save-btn save-btn . dw-btn dw-btn"
+        ;
+        gap: 1em;
+
+        font-size: 1.25em;
+    }
+}
