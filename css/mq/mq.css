@@ -48,7 +48,9 @@
     body.gallery-open a.nav-btn-gallery {
         box-shadow: inset 0px -4px var(--clr4);
     }
-
+    body.my-memes-open a.nav-btn-memes {
+        box-shadow: inset 0px -4px var(--clr4);
+    }
     /* // -- gallery -- */
     .grid-container {
         grid-template-columns: repeat(3, 31%);
@@ -86,7 +88,7 @@
     }
 
     /* -- search-bar --  */
-    .search-image-container {
+    .search-image-div {
         padding: 2.4em;
     }
 

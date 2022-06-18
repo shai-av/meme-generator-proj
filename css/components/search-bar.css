@@ -1,5 +1,8 @@
 /* //-- search bar -- */
-.search-image-container {
+.search-image-container{
+    background-color: var(--clr1);
+}
+.search-image-div {
     padding: 1.4em;
     object-fit: contain;
     background-color: var(--clr1);
@@ -13,7 +16,7 @@
     color: var(--clr4);
 }
 
-.search-image-container div {
+.search-image-div div {
     display: inline-block;
     height: 1em;
     width: 1em;

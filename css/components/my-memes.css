@@ -1,0 +1,45 @@
+/* -- my memes --  */
+.my-memes-container {
+    background-color: var(--clr2);
+    display: none;
+}
+
+body.my-memes-open .my-memes-container {
+    display: block;
+}
+
+.memes-gallery {
+    padding: 1em 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    justify-content: center;
+    gap: 1em;
+}
+
+.grid-item img {
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 2em;
+    box-shadow: 3px 3px 7px 1px var(--clr6);
+}
+
+.memes-gallery .grid-item {
+    position: relative;
+}
+
+.memes-gallery div span {
+    position: absolute;
+    top: 0.8em;
+    right: 0.8em;
+    transition: opacity 0.3s;
+    opacity: 50%;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+.memes-gallery div span:hover {
+    opacity: 100;
+}

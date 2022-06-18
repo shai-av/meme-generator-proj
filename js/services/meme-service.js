@@ -51,6 +51,10 @@ function setMeme() {
     return gMeme
 }
 
+function set_gMeme(meme){
+    gMeme = meme
+}
+
 function setGCurrLine() {
     gCurrLine = gMeme.lines[gMeme.currLine]
 }

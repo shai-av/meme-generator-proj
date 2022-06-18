@@ -43,6 +43,10 @@ function setSelectedImage(img) {
     gSelectedImage = img
 }
 
+function getSelectedImage(){
+    return gSelectedImage
+}
+
 function getSelectedImage() {
     return gSelectedImage
 }

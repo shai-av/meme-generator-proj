@@ -40,7 +40,7 @@ function _resizeCanvas() {
 
 function _renderCanvas() {
     let image = new Image()
-    image.src = getCurrMeme().image.dataset.src
+    image.src = getSelectedImage()
     gCurrImage = image
 
     image.onload = () => {
@@ -96,7 +96,8 @@ function _addListeners() {
     _addMouseListeners()
     _addTouchListeners()
     _addWindowListeners()
-    _addDownloadBtnListenesrs()
+    _addDownloadBtnListeners()
+    _addSaveBtnListeners()
 }
 
 function _addWindowListeners() {
@@ -120,12 +121,17 @@ function _addTouchListeners() {
     gCanvas.addEventListener('touchend', _onUp)
 }
 
-function _addDownloadBtnListenesrs() {
+function _addDownloadBtnListeners() {
     const elDownload = document.querySelector('.download-link')
     elDownload.addEventListener('mousedown', _clearLineFrame)
     elDownload.addEventListener('touchstart', _clearLineFrame)
 }
 
+function _addSaveBtnListeners(){
+    const elSave = document.querySelector('.save-btn')
+    elSave.addEventListener('mousedown', _clearLineFrame)
+    elSave.addEventListener('touchstart', _clearLineFrame)
+}
 function _clearLineFrame() {
     setCurrLineIdx(-1)
     _renderCanvas()
@@ -261,6 +267,12 @@ function _downloadCanvas(elLink) {
     const data = gCanvas.toDataURL()
     elLink.href = data
     elLink.download = 'my-img.jpg'
+}
+
+function onSave(){
+    const meme = getCurrMeme()
+    const imgDataUrl = gCanvas.toDataURL()
+    saveMeme(meme,imgDataUrl)
 }
 
 function _setLineTextInputVal() {

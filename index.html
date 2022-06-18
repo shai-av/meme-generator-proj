@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="gallery-open" onload="onGalleryInit()">
+<body class="gallery-open" onload="onGalleryInit(),onMyMemeInit()">
     <header class="main-header">
         <div class="main-layout flex space-between align-center">
             <div class="logo-container"><img src="DESIGN/LOGO/LOGO.png"></div>
@@ -18,7 +18,8 @@
                     <li><a href="#" onclick="onGalleryClk()"
                             class="nav-btn-gallery flex align-center justify-center">Gallery</a></li>
                     <span class="spreader">|</span>
-                    <li><a href="#" class="nav-btn-memes flex align-center justify-center">Memes</a></li>
+                    <li><a href="#" onclick="onMemesClk()"
+                        class="nav-btn-memes flex align-center justify-center">Memes</a></li>
                     <span class="spreader">|</span>
                     <li><a href="#" class="nav-btn-about flex align-center justify-center">About</a></li>
                 </ul>
@@ -28,10 +29,12 @@
     </header>
     <main class="main-content">
         <section class="gallery-container">
-            <section class="search-image-container main-layout flex align-center">
+            <section class="search-image-container">
+                <div class="search-image-div main-layout flex align-center">
                 <input type="text" name="search-img" class="search-image" placeholder="Enter search keywords"
                     oninput="onFilter(this.value)" spellcheck="false">
                 <div onclick="onSearchIcon()"><img src="DESIGN/ICONS/search-icon.png" alt='&#128269'></div>
+            </div>
             </section>
             <div class="gallery grid-container main-layout">
             </div>
@@ -101,9 +104,13 @@
                         </div>
                         <button class="controller-item dw-btn"><a href="#" class="download-link"
                                 onclick="_downloadCanvas(this)" download="temp">Download</a></button>
-                        <button class="controller-item save-btn">Save</button>
+                        <button class="controller-item save-btn" onclick="onSave()">Save</button>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="my-memes-container">
+            <div class="memes-gallery grid-container main-layout">
             </div>
         </section>
         <div class="block-screen" onclick="onHamburger()"></div>
@@ -117,6 +124,8 @@
     <script src="js/gallery-controller.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
+    <script src="js/services/my-memes-service.js"></script>
+    <script src="js/my-memes-controller.js"></script>
     <script src="js/main-controller.js"></script>
 </body>
 
