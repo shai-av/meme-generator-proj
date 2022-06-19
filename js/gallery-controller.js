@@ -4,18 +4,19 @@ function onGalleryInit() {
 }
 
 function _renderImages() {
-    let images = getImages()
+    const images = getImages()
+    let strHTML
     if (!images.length) {
         strHTML = `<h2 class="no-content-msg">No matching images</h2>`
     } else {
-        let strHTML = ''
+        strHTML = ''
         images.forEach((img) => strHTML += `<div class="grid-item"><img 
                                         data-src=img/${img.src} 
                                         data-tag=${img.tag}
                                         src="img/${img.src}" 
                                         onclick="onImgClk(this)">
                                         </div>`)
-        let gallery = document.querySelector('.gallery')
+        const gallery = document.querySelector('.gallery')
         gallery.innerHTML = strHTML
     }
 }

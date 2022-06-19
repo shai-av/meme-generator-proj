@@ -32,7 +32,7 @@ var gImages = [
 function getImages() {
     let images = gImages.slice()
     if (gFilterBy.length) {
-        for (var i = 0; i < gFilterBy.length; i++) {
+        for (let i = 0; i < gFilterBy.length; i++) {
             images = _filterImages(gFilterBy[i], images)
         }
     }

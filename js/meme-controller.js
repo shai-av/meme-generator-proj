@@ -29,17 +29,17 @@ function getCanvas() {
 
 //--- Canvas ---
 function _resizeCanvas() {
-    let elCanvasContainer = document.querySelector('.canvas-container')
-    let imageHeight = +gCurrImage.naturalHeight
-    let imageWidth = +gCurrImage.naturalWidth
-    let imageRatio = imageHeight / imageWidth
+    const elCanvasContainer = document.querySelector('.canvas-container')
+    const imageHeight = +gCurrImage.naturalHeight
+    const imageWidth = +gCurrImage.naturalWidth
+    const imageRatio = imageHeight / imageWidth
 
     gCanvas.width = elCanvasContainer.offsetWidth
     gCanvas.height = elCanvasContainer.offsetWidth * imageRatio
 }
 
 function _renderCanvas() {
-    let image = new Image()
+    const image = new Image()
     image.src = getSelectedImage()
     gCurrImage = image
 
@@ -142,7 +142,7 @@ function _clearLineFrame() {
 //--- events handlers ---
 function _onDown(ev) {
     const pos = _getPosFromEv(ev)
-    let lineIdx = _getClickedLineIdx(pos)
+    const lineIdx = _getClickedLineIdx(pos)
     if (lineIdx !== -1) {
         setCurrLineIdx(lineIdx)
         _setControllerValuesByLine()
@@ -234,7 +234,7 @@ function onMoveNextLine() {
 }
 
 function onAdd(str = '') {
-    let elLineTxtInput = document.querySelector('[name=line-text]')
+    const elLineTxtInput = document.querySelector('[name=line-text]')
     addLine(str)
     _setLineTextInputVal()
     _renderLinesSetRange()
@@ -284,7 +284,7 @@ function _showHidesaveModal() {
 }
 
 function _setLineTextInputVal() {
-    let elLineTxtInput = document.querySelector('[name=line-text]')
+    const elLineTxtInput = document.querySelector('[name=line-text]')
 
     if (!_isLines()) {
         elLineTxtInput.value = 'press +Add'

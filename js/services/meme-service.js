@@ -37,7 +37,7 @@ var gDemoLine = {
 }
 
 function _createMeme() {
-    let meme = {
+    const meme = {
         image: getSelectedImage(),
         currLine: 0,
         lines: [gDefLine1, gDefLine2]
@@ -64,7 +64,7 @@ function increaseTextSize(x = 5) {
 }
 
 function decreaseTextSize(x = 5) {
-    let size = gCurrLine.size
+    const size = gCurrLine.size
     if (size > 5) gCurrLine.size -= x
 }
 
@@ -112,7 +112,7 @@ function setAlign(dir) {
 }
 
 function addLine(str = '') {
-    let newLine = JSON.parse(JSON.stringify(gDemoLine))
+    const newLine = JSON.parse(JSON.stringify(gDemoLine))
     newLine.text = str
     newLine.posY = undefined
     gMeme.lines.push(newLine)
@@ -131,7 +131,7 @@ function setText(val) {
 
 function setRange(line, { posX, posY, text, size }) {
     const context = getContext()
-    let txtWidth = context.measureText(text).width
+    const txtWidth = context.measureText(text).width
     line.range = {
         xStart: posX - txtWidth / 2 - 5,
         yStart: posY - size * 1.2,

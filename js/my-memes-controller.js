@@ -6,7 +6,7 @@ function onMyMemeInit() {
 }
 
 function _renderMemes() {
-    let memes = getMyMemes()
+    const memes = getMyMemes()
     let strHTML = ''
     if (!memes.length) {
         strHTML = `<h2 class="no-content-msg">No memes to show</h2>`
@@ -16,12 +16,12 @@ function _renderMemes() {
                                         onclick="onMemeClk(${idx})">
                                         </div>`)
     }
-    let gallery = document.querySelector('.memes-gallery')
+    const gallery = document.querySelector('.memes-gallery')
     gallery.innerHTML = strHTML
 }
 
 function onMemeClk(memeIdx) {
-    let meme = getMyMemes()[memeIdx]
+    const meme = getMyMemes()[memeIdx]
     setSelectedImage(meme.image)
     set_gMeme(meme)
     showMemeGen()
