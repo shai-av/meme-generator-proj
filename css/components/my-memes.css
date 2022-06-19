@@ -43,3 +43,9 @@ body.my-memes-open .my-memes-container {
 .memes-gallery div span:hover {
     opacity: 100;
 }
+
+.no-memes-msg{
+    color:var(--clr4);
+    font-family: Montserrat-Bold;
+    justify-self:center;
+}
