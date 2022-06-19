@@ -78,6 +78,7 @@ body.menu-open .block-screen {
     font-size: xx-large;
     padding-right: 1em;
     padding: 0.359em 0;
+    cursor: pointer;
 }
 
 .hamb-btn::before {

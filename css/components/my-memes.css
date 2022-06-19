@@ -12,20 +12,6 @@ body.my-memes-open .my-memes-container {
     padding: 1em 0;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 48%);
-    justify-content: center;
-    gap: 1em;
-}
-
-.grid-item img {
-    object-fit: cover;
-    cursor: pointer;
-    border-radius: 2em;
-    box-shadow: 3px 3px 7px 1px var(--clr6);
-}
-
 .memes-gallery .grid-item {
     position: relative;
 }
