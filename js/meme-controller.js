@@ -11,8 +11,6 @@ var gCurrImage = null
 function onMemeGenInit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
-
-    setMeme()
     _setLineTextInputVal()
     _addListeners()
     _renderCanvas()
@@ -82,6 +80,7 @@ function _drawRect({ xStart, yStart, xRate, yRate }, { topLeft, bottomLeft, topR
 
 function _renderLinesSetRange() {
     const lines = getCurrMeme().lines
+
     lines.forEach((line, idx) => {
         if (!line.posX) line.posX = gCanvas.width / 2
         if (!line.posY) line.posY = gCanvas.height / 2
@@ -191,9 +190,22 @@ function _onMove(ev) {
         _onResizeLine(dx, dy)
     } else if (gRotate) {
         // rotateTxt(dx,dy)
+
+        //rotate template 
+        //ctx.save()
+        //ctx.translate(posX,posY)
+        //ctx.rotate("deg"*Math.PI/180)
+        //ctx.txt(txt,0,0)
+        //ctx.restore
     }
     gStartPos = pos
     _renderCanvas()
+}
+
+function _onUp() {
+    if (gDrag) gDrag = false
+    if (gDragCorner) gDragCorner = false
+    if(gRotate) gRotate = false
 }
 
 function _onResizeLine(dx, dy) {
@@ -210,11 +222,6 @@ function _onResizeLine(dx, dy) {
             break
         case 3: resizeLine(dx, dy)
     }
-}
-
-function _onUp() {
-    if (gDrag) gDrag = false
-    if (gDragCorner) gDragCorner = false
 }
 
 function _isRotArc({ posX, posY }) {

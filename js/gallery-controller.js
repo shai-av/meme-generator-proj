@@ -24,6 +24,7 @@ function _renderImages() {
 function onImgClk(img) {
     setSelectedImage(img.dataset.src)
     showMemeGen()
+    setMeme()
     onMemeGenInit()
 }
 
