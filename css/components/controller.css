@@ -127,3 +127,9 @@
 .save-btn {
     grid-area: save-btn;
 }
+
+.hide-input{
+    position:absolute;
+    opacity:0;
+    pointer-events: none;
+}

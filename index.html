@@ -94,10 +94,20 @@
                             <option value="Ariel">Ariel</option>
                             <option value="Comic Sans MS">Comic</option>
                         </select>
-                        <input class="controller-item stroke-clr" title="stroke" type="color" name="stroke-color"
+                        <div class="controller-item stroke-clr" title="stroke">
+                            <label for="id-stroke">
+                            <img src="DESIGN/ICONS/text stroke.png">
+                            <input id="id-stroke" class="hide-input"  type="color" name="stroke-color"
                             onchange="onStrokeClrChnage(this.value)">
-                        <input class="controller-item font-clr" title="font" type="color" name="font-color"
+                        </label>
+                        </div>
+                        <div class="controller-item font-clr" title="font">
+                            <label for="id-font-clr">
+                            <img src="DESIGN/ICONS/paint-board-and-brush.png">
+                            <input id="id-font-clr" class="hide-input"  type="color" name="font-color"
                             onchange="onFontClrChange(this.value)">
+                        </label>
+                        </div>
                         <div class="emojs flex space-evenly align-center">
                             <span onclick="onAdd('😁')">😁</span>
                             <span onclick="onAdd('😎')">😎</span>
