@@ -30,8 +30,8 @@ body.my-memes-open .my-memes-container {
     opacity: 100;
 }
 
-.no-content-msg{
-    color:var(--clr4);
+.no-content-msg {
+    color: var(--clr4);
     font-family: Montserrat-Bold;
-    justify-self:center;
+    justify-self: center;
 }

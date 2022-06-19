@@ -13,7 +13,6 @@ var gDefLine1 = {
     posY: 50,
     range: {}
 }
-
 var gDefLine2 = {
     text: 'Text here',
     font: 'Impact',
@@ -24,7 +23,6 @@ var gDefLine2 = {
     posY: 'bottom',
     range: {}
 }
-
 var gDemoLine = {
     text: '',
     font: 'Impact',
@@ -51,7 +49,7 @@ function setMeme() {
     return gMeme
 }
 
-function set_gMeme(meme){
+function set_gMeme(meme) {
     gMeme = meme
 }
 
@@ -129,26 +127,39 @@ function setText(val) {
     gCurrLine.text = val
 }
 
-function setRange(line, { posX, posY, text, size }) {
+function setRange(line) {
     const context = getContext()
-    const txtWidth = context.measureText(text).width
-    line.range = {
+    const txtWidth = context.measureText(line.text).width
+    line.range = _setLineFrame(line, txtWidth)
+    line.corners = _setLineCorners(line.range)
+    line.rotArc = _setLineRotArc(line.range)
+}
+
+function _setLineFrame({ posX, posY, size }, txtWidth) {
+    return {
         xStart: posX - txtWidth / 2 - 5,
         yStart: posY - size * 1.2,
         xRate: txtWidth + 10,
         yRate: size * 1.5
     }
-   setLineCorners(line,line.range)
 }
-function setLineCorners(line,{xStart,yStart,xRate,yRate}){
-    line.corners ={
-        topLeft:[xStart-10, yStart-10, 10, 10],
-        bottomLeft:[xStart-10, yStart+yRate, 10, 10],
-        topRight:[xStart+xRate, yStart-10, 10, 10],
-        bottomRight:[xStart+xRate, yStart+yRate, 10, 10]
+
+function _setLineCorners({ xStart, yStart, xRate, yRate }) {
+    return {
+        topLeft: [xStart - 10, yStart - 10, 10, 10],
+        bottomLeft: [xStart - 10, yStart + yRate, 10, 10],
+        topRight: [xStart + xRate, yStart - 10, 10, 10],
+        bottomRight: [xStart + xRate, yStart + yRate, 10, 10]
     }
 }
-//////////////////////////
+
+function _setLineRotArc({ xStart, yStart, xRate, yRate }) {
+    return {
+        xStart: xStart + xRate + 20,
+        yStart: yStart + yRate + 20,
+        size:5
+    }
+}
 
 function getCurrLineIdx() {
     return gMeme.currLine
@@ -165,8 +176,8 @@ function moveLine(dx, dy) {
     gCurrLine.posY += dy
 }
 
-function resizeLine(dx,dy){
-    gCurrLine.size += (dx+dy)*0.47
+function resizeLine(dx, dy) {
+    gCurrLine.size += (dx + dy) * 0.47
 }
 
 function getCurrMeme() {
@@ -197,6 +208,6 @@ function resetDefaultLines() {
     }
 }
 
-function setResetDefaultLines(){
+function setResetDefaultLines() {
     resetDefaultLines()
 }

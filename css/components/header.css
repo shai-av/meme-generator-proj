@@ -15,7 +15,6 @@
     text-decoration: none;
     color: var(--clr1);
     padding: 0 2em;
-
 }
 
 .main-header .main-nav li {
@@ -34,6 +33,7 @@
 body.gallery-open a.nav-btn-gallery {
     color: var(--clr4);
 }
+
 body.my-memes-open a.nav-btn-memes {
     color: var(--clr4);
 }

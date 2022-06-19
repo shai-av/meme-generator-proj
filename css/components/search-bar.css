@@ -1,7 +1,8 @@
 /* //-- search bar -- */
-.search-image-container{
+.search-image-container {
     background-color: var(--clr1);
 }
+
 .search-image-div {
     padding: 1.4em;
     object-fit: contain;

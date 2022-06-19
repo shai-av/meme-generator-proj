@@ -26,14 +26,14 @@
 
 .gallery-about .txt p {
     font-size: 0.9375rem;
-    font-family: Montserrat-Regular,sans-serif;
+    font-family: Montserrat-Regular, sans-serif;
     margin: 0;
     margin-bottom: 0.7em;
 }
 
 .gallery-about .txt h2 {
     font-size: 1.375em;
-    font-family: Montserrat-Bold,serif;
+    font-family: Montserrat-Bold, serif;
     color: var(--clr3);
     margin: 0;
     margin-bottom: 0.5em

@@ -3,6 +3,7 @@ var gCanvas
 var gCtx
 var gDrag = false
 var gDragCorner = false
+var gRotate = false
 var gCornerIdx
 var gStartPos
 var gCurrImage = null
@@ -10,6 +11,7 @@ var gCurrImage = null
 function onMemeGenInit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
+
     setMeme()
     _setLineTextInputVal()
     _addListeners()
@@ -85,16 +87,16 @@ function _renderLinesSetRange() {
         if (!line.posY) line.posY = gCanvas.height / 2
         if (line.posY === 'bottom') line.posY = getCanvas().height - line.size
         _drawText(line)
-        setRange(line, line)
-        if (getCurrLineIdx() === idx) _drawRect(line.range, line.corners), _drawArc(line.range)
+        setRange(line)
+        if (getCurrLineIdx() === idx) _drawRect(line.range, line.corners), _drawArc(line.rotArc)
     })
 }
 
-function _drawArc({ xStart, yStart, xRate, yRate }) {
+function _drawArc({ xStart, yStart, size }) {
     gCtx.save()
     gCtx.beginPath()
     gCtx.lineWidth = '2'
-    gCtx.arc(xStart + xRate + 20, yStart + yRate + 20, 5, 0, 2 * Math.PI)
+    gCtx.arc(xStart, yStart, size, 0, 2 * Math.PI)
     gCtx.strokeStyle = 'white'
     gCtx.stroke()
     gCtx.fillStyle = 'lightgreen'
@@ -116,6 +118,7 @@ function _addWindowListeners() {
         _resizeCanvas()
         _renderCanvas()
     })
+
     window.addEventListener('mouseup', _onUp)
     window.addEventListener('touchend', _onUp)
 }
@@ -143,6 +146,7 @@ function _addSaveBtnListeners() {
     elSave.addEventListener('mousedown', _clearLineFrame)
     elSave.addEventListener('touchstart', _clearLineFrame)
 }
+
 function _clearLineFrame() {
     setCurrLineIdx(-1)
     _renderCanvas()
@@ -153,11 +157,15 @@ function _clearLineFrame() {
 //--- events handlers ---
 function _onDown(ev) {
     const pos = _getPosFromEv(ev)
-    if (_getCornerIdx(pos) !== -1) {
+    if (_isRotArc(pos)) {
+        gRotate = true
+        gStartPos = pos
+        console.log('rotation try')
+        return
+    } else if (_getCornerIdx(pos) !== -1) {
         gDragCorner = true
         gStartPos = pos
         gCornerIdx = _getCornerIdx(pos)
-        console.log(gCornerIdx);
     } else {
         const lineIdx = _getClickedLineIdx(pos)
         if (lineIdx !== -1) {
@@ -172,22 +180,20 @@ function _onDown(ev) {
 }
 
 function _onMove(ev) {
+    if (!gDrag && !gDragCorner && !gRotate) return
+    const pos = _getPosFromEv(ev)
+    const dx = pos.posX - gStartPos.posX
+    const dy = pos.posY - gStartPos.posY
+
     if (gDrag) {
-        const pos = _getPosFromEv(ev)
-        const dx = pos.posX - gStartPos.posX
-        const dy = pos.posY - gStartPos.posY
         moveLine(dx, dy)
-        gStartPos = pos
-        _renderCanvas()
-    }
-    if (gDragCorner) {
-        const pos = _getPosFromEv(ev)
-        const dx = pos.posX - gStartPos.posX
-        const dy = pos.posY - gStartPos.posY
+    } else if (gDragCorner) {
         _onResizeLine(dx, dy)
-        gStartPos = pos
-        _renderCanvas()
+    } else if (gRotate) {
+        // rotateTxt(dx,dy)
     }
+    gStartPos = pos
+    _renderCanvas()
 }
 
 function _onResizeLine(dx, dy) {
@@ -211,6 +217,12 @@ function _onUp() {
     if (gDragCorner) gDragCorner = false
 }
 
+function _isRotArc({ posX, posY }) {
+    const circle = getCurrLine().rotArc
+    const distance = Math.sqrt((circle.xStart - posX) ** 2 + (circle.yStart - posY) ** 2)
+    return distance <= circle.size
+}
+
 function _getCornerIdx({ posX, posY }) {
     const allCorners = Object.values(getCurrLine().corners)
     return allCorners.findIndex((corner) => {
@@ -231,6 +243,7 @@ function _getClickedLineIdx({ posX, posY }) {
 function _getPosFromEv(ev) {
     let posX
     let posY
+
     if (ev.type.includes('touch')) {
         ev.preventDefault()
         ev = ev.changedTouches[0]

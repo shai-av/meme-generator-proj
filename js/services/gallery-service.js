@@ -31,6 +31,7 @@ var gImages = [
 
 function getImages() {
     let images = gImages.slice()
+
     if (gFilterBy.length) {
         for (let i = 0; i < gFilterBy.length; i++) {
             images = _filterImages(gFilterBy[i], images)
@@ -43,7 +44,7 @@ function setSelectedImage(img) {
     gSelectedImage = img
 }
 
-function getSelectedImage(){
+function getSelectedImage() {
     return gSelectedImage
 }
 
