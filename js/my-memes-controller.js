@@ -9,7 +9,7 @@ function _renderMemes() {
     let memes = getMyMemes()
     let strHTML = ''
     if (!memes.length) {
-        strHTML = `<h2 class="no-memes-msg">No memes to show</h2>`
+        strHTML = `<h2 class="no-content-msg">No memes to show</h2>`
     } else {
         memes.forEach((meme, idx) => strHTML += `<div class="grid-item"><span onclick=onX(${idx})>X</span><img  
                                         src="${meme.imgData}" 
