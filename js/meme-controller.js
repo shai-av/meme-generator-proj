@@ -225,9 +225,9 @@ function _onResizeLine(dx, dy) {
 }
 
 function _isRotArc({ posX, posY }) {
-    const circle = getCurrLine().rotArc
-    const distance = Math.sqrt((circle.xStart - posX) ** 2 + (circle.yStart - posY) ** 2)
-    return distance <= circle.size
+    // const circle = getCurrLine().rotArc
+    // const distance = Math.sqrt((circle.xStart - posX) ** 2 + (circle.yStart - posY) ** 2)
+    // return distance <= circle.size
 }
 
 function _getCornerIdx({ posX, posY }) {
