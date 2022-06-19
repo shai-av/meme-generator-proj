@@ -27,6 +27,7 @@ function onMemeClk(memeIdx) {
     const meme = getMyMemes()[memeIdx]
     setSelectedImage(meme.image)
     set_gMeme(meme)
+    onMovePrevLine()
     showMemeGen()
     onMemeGenInit()
 }
