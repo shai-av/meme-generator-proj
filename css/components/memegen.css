@@ -19,16 +19,19 @@ body.memegen-open .memegen {
 
 .save-modal {
     background-color: var(--clr4);
-    font-family: Impact, 'Arial Narrow Bold', sans-serif;
+    font-family: Montserrat-Regular, 'Arial Narrow Bold', sans-serif;
     position: absolute;
-    transition: 1s;
-    top: -5em;
-    right: 1em;
-    padding: 0.5em;
+    top: calc(100%/2);
+    right:calc((100%/2));
+    padding: 0.5em 2em;
+    font-weight: 200;
     font-size: 1.5em;
     border-radius: 1em;
+    transition: opacity 0.5s;
+    opacity: 0%;
+    pointer-events: none;
 }
 
 body.save-modal-open .save-modal {
-    top: 1em;
+    opacity: 100%;
 }

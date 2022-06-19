@@ -38,7 +38,7 @@
     font-size: 1em;
     color: var(--clr1);
     border-radius: 1em;
-    padding-left: 0.5em;
+    padding-inline-start: 0.5em;
 }
 
 .arrow-up {
@@ -71,6 +71,7 @@
     background-color: var(--clr3);
     color: var(--clr1);
     border-radius: 1em;
+    padding-inline-start: 0.5em;
 }
 
 .stroke-clr {

@@ -76,7 +76,7 @@ body.menu-open .block-screen {
     background-color: inherit;
     border: none;
     font-size: xx-large;
-    padding-right: 1em;
+    padding-inline-end: 1em;
     padding: 0.359em 0;
     cursor: pointer;
 }

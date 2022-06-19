@@ -68,7 +68,7 @@
     .gallery-about .txt {
         text-align: start;
         padding-top: 5em;
-        padding-left: 2.47rem;
+        padding-inline-start: 2.47rem;
         max-width: 100%;
     }
 
