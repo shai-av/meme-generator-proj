@@ -278,6 +278,7 @@ function onDecreaseTextSize() {
 
 function onStrokeClrChnage(color) {
     if (_isNoLineSelected()) return
+    console.log('entered');
     setStrokeColor(color)
     _renderCanvas()
 }
@@ -389,6 +390,9 @@ function _isNoLineSelected() {
 
 function onTextChange(val) {
     if (!_isLines()) return
+    const txtWidth = gCtx.measureText(val).width
+    if(txtWidth>gCanvas.width-10) return
+    
     setText(val)
     _renderCanvas()
 }

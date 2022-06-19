@@ -26,7 +26,7 @@ function _renderMemes() {
 function onMemeClk(memeIdx) {
     const meme = getMyMemes()[memeIdx]
     setSelectedImage(meme.image)
-    set_gMeme(meme)
+    set_gMeme(JSON.parse(JSON.stringify(meme)))
     onMovePrevLine()
     showMemeGen()
     onMemeGenInit()
