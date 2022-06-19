@@ -4,7 +4,7 @@ var gMeme
 var gCurrLine
 
 var gDefLine1 = {
-    text: 'Text Here1',
+    text: 'Text here',
     font: 'Impact',
     size: 35,
     color: '#ffffff',
@@ -15,7 +15,7 @@ var gDefLine1 = {
 }
 
 var gDefLine2 = {
-    text: 'Text Here2',
+    text: 'Text here',
     font: 'Impact',
     size: 35,
     color: '#ffffff',
@@ -161,7 +161,7 @@ function getCurrMeme() {
 
 function resetDefaultLines() {
     gDefLine1 = {
-        text: 'Text Here1',
+        text: 'Text here',
         font: 'Impact',
         size: 35,
         color: '#ffffff',
@@ -172,7 +172,7 @@ function resetDefaultLines() {
     }
 
     gDefLine2 = {
-        text: 'Text Here2',
+        text: 'Text here',
         font: 'Impact',
         size: 35,
         color: '#ffffff',

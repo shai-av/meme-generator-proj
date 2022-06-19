@@ -291,7 +291,7 @@ function _setLineTextInputVal() {
         elLineTxtInput.disabled = true
     } else {
         if (getCurrLineIdx() === -1) {
-            elLineTxtInput.value = 'No Line Selected'
+            elLineTxtInput.value = 'No line selected'
             elLineTxtInput.disabled = true
         } else {
             elLineTxtInput.disabled = false
