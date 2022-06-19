@@ -19,7 +19,7 @@
                             class="nav-btn-gallery flex align-center justify-center">Gallery</a></li>
                     <span class="spreader">|</span>
                     <li><a href="#" onclick="onMemesClk()"
-                        class="nav-btn-memes flex align-center justify-center">Memes</a></li>
+                            class="nav-btn-memes flex align-center justify-center">Memes</a></li>
                     <span class="spreader">|</span>
                     <li><a href="#" class="nav-btn-about flex align-center justify-center">About</a></li>
                 </ul>
@@ -31,10 +31,10 @@
         <section class="gallery-container">
             <section class="search-image-container">
                 <div class="search-image-div main-layout flex align-center">
-                <input type="text" name="search-img" class="search-image" placeholder="Enter search keywords"
-                    oninput="onFilter(this.value)" spellcheck="false">
-                <div onclick="onSearchIcon()"><img src="DESIGN/ICONS/search-icon.png" alt='&#128269'></div>
-            </div>
+                    <input type="text" name="search-img" class="search-image" placeholder="Enter search keywords"
+                        oninput="onFilter(this.value)" spellcheck="false">
+                    <div onclick="onSearchIcon()"><img src="DESIGN/ICONS/search-icon.png" alt='&#128269'></div>
+                </div>
             </section>
             <div class="gallery grid-container main-layout">
             </div>
@@ -88,7 +88,6 @@
                         <div class="controller-item align-right" onclick="onAlign('right')">
                             <img src="DESIGN/ICONS/align-to-right.png">
                         </div>
-
                         <select class="font-select" name="font-select" onchange="onFontChange(this.value)">
                             <option value="Impact">Impact</option>
                             <option value="Ariel">Ariel</option>
@@ -96,17 +95,17 @@
                         </select>
                         <div class="controller-item stroke-clr" title="stroke">
                             <label for="id-stroke">
-                            <img src="DESIGN/ICONS/text stroke.png">
-                            <input id="id-stroke" class="hide-input"  type="color" name="stroke-color"
-                            onchange="onStrokeClrChnage(this.value)">
-                        </label>
+                                <img src="DESIGN/ICONS/text stroke.png">
+                                <input id="id-stroke" class="hide-input" type="color" name="stroke-color"
+                                    onchange="onStrokeClrChnage(this.value)">
+                            </label>
                         </div>
                         <div class="controller-item font-clr" title="font">
                             <label for="id-font-clr">
-                            <img src="DESIGN/ICONS/paint-board-and-brush.png">
-                            <input id="id-font-clr" class="hide-input"  type="color" name="font-color"
-                            onchange="onFontClrChange(this.value)">
-                        </label>
+                                <img src="DESIGN/ICONS/paint-board-and-brush.png">
+                                <input id="id-font-clr" class="hide-input" type="color" name="font-color"
+                                    onchange="onFontClrChange(this.value)">
+                            </label>
                         </div>
                         <div class="emojs flex space-evenly align-center">
                             <span onclick="onAdd('😁')">😁</span>
