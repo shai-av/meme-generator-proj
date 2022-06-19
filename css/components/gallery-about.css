@@ -12,7 +12,7 @@
     height: 9.8125em;
     border-radius: 50%;
     background-color: var(--clr3);
-    background-image: url(../../DESIGN/IMAGES/demo-pic.png);
+    background-image: url("../../img/demo-pic.png");
     background-position: center;
 }
 
