@@ -138,7 +138,17 @@ function setRange(line, { posX, posY, text, size }) {
         xRate: txtWidth + 10,
         yRate: size * 1.5
     }
+   setLineCorners(line,line.range)
 }
+function setLineCorners(line,{xStart,yStart,xRate,yRate}){
+    line.corners ={
+        topLeft:[xStart-10, yStart-10, 10, 10],
+        bottomLeft:[xStart-10, yStart+yRate, 10, 10],
+        topRight:[xStart+xRate, yStart-10, 10, 10],
+        bottomRight:[xStart+xRate, yStart+yRate, 10, 10]
+    }
+}
+//////////////////////////
 
 function getCurrLineIdx() {
     return gMeme.currLine
@@ -153,6 +163,10 @@ function setCurrLineIdx(idx) {
 function moveLine(dx, dy) {
     gCurrLine.posX += dx
     gCurrLine.posY += dy
+}
+
+function resizeLine(dx,dy){
+    gCurrLine.size += (dx+dy)*0.47
 }
 
 function getCurrMeme() {

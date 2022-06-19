@@ -2,6 +2,8 @@
 var gCanvas
 var gCtx
 var gDrag = false
+var gDragCorner = false
+var gCornerIdx
 var gStartPos
 var gCurrImage = null
 
@@ -61,11 +63,19 @@ function _drawText({ strokeColor, color, size, font, text, posX, posY }) {
     gCtx.strokeText(text, posX, posY)
 }
 
-function _drawRect({ xStart, yStart, xRate, yRate }) {
+function _drawRect({ xStart, yStart, xRate, yRate }, { topLeft, bottomLeft, topRight, bottomRight }) {
+    gCtx.save()
     gCtx.beginPath()
     gCtx.strokeStyle = 'black'
+    gCtx.rect(...topLeft)
+    gCtx.rect(...bottomLeft)
+    gCtx.rect(...topRight)
+    gCtx.rect(...bottomRight)
+    gCtx.fillStyle = 'white'
+    gCtx.fill()
     gCtx.rect(xStart, yStart, xRate, yRate)
     gCtx.stroke()
+    gCtx.restore()
 }
 
 function _renderLinesSetRange() {
@@ -76,19 +86,20 @@ function _renderLinesSetRange() {
         if (line.posY === 'bottom') line.posY = getCanvas().height - line.size
         _drawText(line)
         setRange(line, line)
-
-        if (getCurrLineIdx() === idx) _drawRect(line.range), _drawArc(line.range)
+        if (getCurrLineIdx() === idx) _drawRect(line.range, line.corners), _drawArc(line.range)
     })
 }
 
 function _drawArc({ xStart, yStart, xRate, yRate }) {
+    gCtx.save()
     gCtx.beginPath()
     gCtx.lineWidth = '2'
-    gCtx.arc(xStart + xRate, yStart + yRate, 5, 0, 2 * Math.PI)
+    gCtx.arc(xStart + xRate + 20, yStart + yRate + 20, 5, 0, 2 * Math.PI)
     gCtx.strokeStyle = 'white'
     gCtx.stroke()
     gCtx.fillStyle = 'lightgreen'
     gCtx.fill()
+    gCtx.restore()
 }
 
 //--- listeners ---
@@ -142,15 +153,22 @@ function _clearLineFrame() {
 //--- events handlers ---
 function _onDown(ev) {
     const pos = _getPosFromEv(ev)
-    const lineIdx = _getClickedLineIdx(pos)
-    if (lineIdx !== -1) {
-        setCurrLineIdx(lineIdx)
-        _setControllerValuesByLine()
-        _setLineTextInputVal()
-        _renderCanvas()
-        gDrag = true
+    if (_getCornerIdx(pos) !== -1) {
+        gDragCorner = true
         gStartPos = pos
-    } else setCurrLineIdx(-1), _renderCanvas(), _setLineTextInputVal()
+        gCornerIdx = _getCornerIdx(pos)
+        console.log(gCornerIdx);
+    } else {
+        const lineIdx = _getClickedLineIdx(pos)
+        if (lineIdx !== -1) {
+            setCurrLineIdx(lineIdx)
+            _setControllerValuesByLine()
+            _setLineTextInputVal()
+            _renderCanvas()
+            gDrag = true
+            gStartPos = pos
+        } else setCurrLineIdx(-1), _renderCanvas(), _setLineTextInputVal()
+    }
 }
 
 function _onMove(ev) {
@@ -162,10 +180,43 @@ function _onMove(ev) {
         gStartPos = pos
         _renderCanvas()
     }
+    if (gDragCorner) {
+        const pos = _getPosFromEv(ev)
+        const dx = pos.posX - gStartPos.posX
+        const dy = pos.posY - gStartPos.posY
+        _onResizeLine(dx, dy)
+        gStartPos = pos
+        _renderCanvas()
+    }
+}
+
+function _onResizeLine(dx, dy) {
+    const corenerIdx = gCornerIdx
+    switch (corenerIdx) {
+        case 0:
+            resizeLine(-dx, -dy)
+            break
+        case 1:
+            resizeLine(-dx, dy)
+            break
+        case 2:
+            resizeLine(dx, -dy)
+            break
+        case 3: resizeLine(dx, dy)
+    }
 }
 
 function _onUp() {
     if (gDrag) gDrag = false
+    if (gDragCorner) gDragCorner = false
+}
+
+function _getCornerIdx({ posX, posY }) {
+    const allCorners = Object.values(getCurrLine().corners)
+    return allCorners.findIndex((corner) => {
+        return posX >= corner[0] && posX <= corner[0] + corner[2] &&
+            posY >= corner[1] && posY <= corner[1] + corner[3]
+    })
 }
 
 function _getClickedLineIdx({ posX, posY }) {
